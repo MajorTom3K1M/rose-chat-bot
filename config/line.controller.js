@@ -25,7 +25,7 @@ function handleMessageEvent(event) {
         text: 'Hi, Friend'
     };
 
-    if(eventText.include('รายการสินค้า')) {
+    if(eventText.includes('รายการสินค้า')) {
         msg = {
             "type": "template",
             "altText": "Shopping List",
