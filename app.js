@@ -13,6 +13,5 @@ app.use(cors())
 app.use('/apis/', router);
 
 app.get('/', (req, res) => res.send('Service Backend Start!'))
-app.get('/webhook', (req, res) => res.send("Hello"))
 
 app.listen(port, () => console.log(`Http app listening on port ${port}!`))
