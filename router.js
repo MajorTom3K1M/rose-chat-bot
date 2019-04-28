@@ -6,7 +6,6 @@ const {config,handleEvent,handleMessageEvent} = require('./config/line.controlle
 
 const WebHook = require('./controllers/webhook.controller');
 
-router.post('/webhook', line.middleware(config),WebHook);
-
+router.post('/webhook', line.middleware(config), WebHook);
 
 module.exports = router;
