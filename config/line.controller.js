@@ -1,7 +1,7 @@
 const line = require('@line/bot-sdk');
 
 const config = {
-    channelAccessToken: (process.env.channelAccessToken || "Qu5Ffzm+11X8Ebg57vTWcQLIk2jzj9k/nzT/vM5C6iJzFGCyeJB493nWjL4z4W1KaYEXrotpYAuTWQQfuQ9bJxo96pQPIt3T2zMZbvAu/hXm7kscRtjlihDCf7SBkRFtngykKb8GrV8mn0pWyOd4GAdB04t89/1O/w1cDnyilFU="),
+    channelAccessToken: (process.env.channelAccessToken || "JtnZ4tiXAhiJ0jI6Qc1zgWO50aoV/9ui1Kpekakk/i5xmRbgW4yFPexy3PEv7Gm8aYEXrotpYAuTWQQfuQ9bJxo96pQPIt3T2zMZbvAu/hWnZB4Oqox8tMW8Az3xAjKGR1j6XClorkwPLto82cN+TQdB04t89/1O/w1cDnyilFU="),
     channelSecret: (process.env.channelSecret || "7e11260ef38889493c9bc7d212aa9866")
 };
 
@@ -15,6 +15,7 @@ function handleEvent(event) {
         return Promise.resolve(null);
     }
 }
+
 function handleMessageEvent(event) {
     var msg = {
         type: 'text',
@@ -23,4 +24,4 @@ function handleMessageEvent(event) {
     return client.replyMessage(event.replyToken, msg);
 }
 
-module.exports = {config,handleEvent,handleMessageEvent};
+module.exports = {config, handleEvent, handleMessageEvent};
