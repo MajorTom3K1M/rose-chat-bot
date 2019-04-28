@@ -1,8 +1,8 @@
 const line = require('@line/bot-sdk');
 
 const config = {
-    channelAccessToken: (process.env.channelAccessToken || "+IkMSSPWBisQNVlxH5ApmoYsFFHhBXBjSuRzfyqK58G7f0mMyKrzCCcBDxcu6ZNjHsGVomZ2sh0C9l6gwLyj/AgXJO/cEXyiv409SEJLdLSshI0POW28K/+rJcirj/A4QeU0n9UIzov9aQUMWmaWLQdB04t89/1O/w1cDnyilFU="),
-    channelSecret: (process.env.channelSecret || "24fc5209a4b2c5c447498484291441c3")
+    channelAccessToken: (process.env.channelAccessToken || "Qu5Ffzm+11X8Ebg57vTWcQLIk2jzj9k/nzT/vM5C6iJzFGCyeJB493nWjL4z4W1KaYEXrotpYAuTWQQfuQ9bJxo96pQPIt3T2zMZbvAu/hXm7kscRtjlihDCf7SBkRFtngykKb8GrV8mn0pWyOd4GAdB04t89/1O/w1cDnyilFU="),
+    channelSecret: (process.env.channelSecret || "7e11260ef38889493c9bc7d212aa9866")
 };
 
 const client = new line.Client(config);
