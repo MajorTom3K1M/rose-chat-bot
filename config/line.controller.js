@@ -19,7 +19,7 @@ function handleEvent(event) {
 function handleMessageEvent(event) {
     var msg = {
         type: 'text',
-        text: 'Hi , Friend'
+        text: 'Hi, Friend'
     };
     return client.replyMessage(event.replyToken, msg);
 }

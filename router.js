@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const line = require('@line/bot-sdk');
 
-const {config, handleEvent, handleMessageEvent} = require('./config/line.controller');
+const { config } = require('./config/line.controller');
 
 const WebHook = require('./controllers/webhook.controller');
 
