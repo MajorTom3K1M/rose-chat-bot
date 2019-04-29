@@ -18,6 +18,7 @@ function handleEvent(event) {
 
 function handleMessageEvent(event) {
     var eventText = event.message.text.toLowerCase();
+    console.log(eventText);
 
     // Default Reply Message
     var msg = {
@@ -25,7 +26,7 @@ function handleMessageEvent(event) {
         text: 'Hi, Friend'
     };
 
-    if(eventText.includes('รายการสินค้า')) {
+    if(eventText.includes(['รายการสินค้า'])) {
         msg = {
             "type": "template",
             "altText": "Shopping List",
