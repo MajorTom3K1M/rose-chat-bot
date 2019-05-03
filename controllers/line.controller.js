@@ -5,7 +5,6 @@ const DB = require('./../config/firebase.config')
 const client = new line.Client(configLine);
 
 function handleEvent(event) {
-    console.log(event);
     if (event.type === 'message' && event.message.type === 'text') {
         handleMessageEvent(event);
     } else {
@@ -39,7 +38,7 @@ async function handleMessageEvent(event) {
                     {
                         type: "postback",
                         label: "Add to cart",
-                        data: "action=add&itemid=1"
+                        data: "action=add&itemid=" + doc.id
                     },
                     {
                         type: "uri",
@@ -60,14 +59,15 @@ async function handleMessageEvent(event) {
         }
         return client.replyMessage(event.replyToken, msg);
     }
-    // rude word filter
     else if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
+        // rude word filter
         let msg = {
             type: 'text',
             text: 'หนูดุนะ พี่ไหวหรอ'
         };
         return client.replyMessage(event.replyToken, msg);
-    } else {
+    } 
+    else {
         // Default Reply Message
         let msg = {
             type: 'text',
