@@ -60,6 +60,9 @@ async function handleMessageEvent(event) {
             break;
         case "shopping":
             if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
+                let order = orderSnapshot.find((doc) => {
+                    doc.data().clientId == eventText.source.userId && doc.data().status == "shopping"
+                })
                 let columns = []
                 noteSnapshot.forEach((doc) => {
                     let column = {
@@ -70,7 +73,7 @@ async function handleMessageEvent(event) {
                             {
                                 type: "postback",
                                 label: "Add to cart",
-                                data: "action=updateorder&itemid=" + doc.id + "&clientId=" + eventText.source.userId
+                                data: "action=updateorder&itemid=" + doc.id + "&orderId=" + order.id
                             },
                             {
                                 type: "uri",
@@ -185,6 +188,12 @@ async function handleMessageEvent(event) {
         msg = {
             type: 'text',
             text: 'หนูดุนะ พี่ไหวหรอ'
+        };
+    }
+    else if (includesSome(eventText, ['debug'])) {
+        msg = {
+            type: 'text',
+            text: orderStatus
         };
     }
 

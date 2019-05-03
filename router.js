@@ -15,6 +15,6 @@ router.post('/product',addProduct);
 router.put('/product/:id',editProduct);
 router.delete('/product/:id',deleteProduct);
 router.post('/order',createOrder);
-router.put('/order/:id',updateUserOrder)
+router.post('/updateorder/:orderid:itemid',updateUserOrder)
 
 module.exports = router;

@@ -28,16 +28,42 @@ const createOrder = function(req, res) {
     })
 }
 const updateUserOrder = function(req, res) {
-    let { clientId } = req.params; 
-    let { items, qty } = req.body;
+    let { itemId, orderId } = req.params; 
     const rules = {
-        clientId: "required",
+        orderId: "required",
+        itemId: "required"
     };
-    /*let validation = new Validator(req.body, rules);
+    let validation = new Validator(req.body, rules);
+    /*
     validation.passes(() => {
-        var test = DB.collection('Orders').get().where("clientId", "==", "15")
-        console.log(test)
-    });*/
+        let product = await DB.collection('Products').doc(itemId).get()
+        if(product.quantity <= 0) {
+            res.status(200).json({})
+        }
+        else {
+            await DB.collection('Orders').doc(orderId).get()
+                .then(async (snapshot) => {
+                    await DB.collection('Products').doc(itemId).update({
+                        quantity: quantity - 1 || quantity == "" ? quantity: snapshot.data().quantity - 1,
+                        price: price || price == "" ? price: snapshot.data().price,
+                        title: title || title == "" ? title: snapshot.data().title,
+                        picture: picture || picture == "" ? picture: snapshot.data().picture,
+                    })
+                    if(snapshot.data().items.find(item => item.id == itemId) != null) {
+                        await DB.collection('Orders').doc(orderId).update({
+                            items: 
+                        })
+                    }
+                    else {
+                        await DB.collection('Orders').doc(orderId).add({
+                            items: 
+                        })
+                    }
+
+                })
+        }
+    });
+    */
 }
 
 module.exports = { createOrder, updateUserOrder }
