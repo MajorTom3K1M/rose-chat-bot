@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const line = require('@line/bot-sdk');
 
-const { config } = require('./config/line.controller');
+const  ConfigLine  = require('./config/line.config');
 
 const WebHook = require('./controllers/webhook.controller');
 
-router.post('/webhook', line.middleware(config), WebHook);
+router.post('/webhook', line.middleware(ConfigLine), WebHook);
 
 module.exports = router;

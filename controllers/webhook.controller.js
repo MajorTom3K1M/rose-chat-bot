@@ -1,4 +1,4 @@
-const { handleEvent } = require('./../config/line.controller')
+const { handleEvent } = require('./line.controller')
 
 const WebHook = function (req, res) {
     Promise
