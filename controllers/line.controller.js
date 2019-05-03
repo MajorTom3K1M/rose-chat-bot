@@ -75,7 +75,8 @@ async function handleMessageEvent(event) {
                     querySnapshot.docs.find((doc) => { doc.data().clientId == event.source.userId && doc.data().status == "shopping" })
                 })
                 let columns = []
-                noteSnapshot.get().forEach((doc) => {
+                const productsSnapshot = await DB.collection('Products').get();
+                productsSnapshot.forEach((doc) => {
                     let column = {
                         thumbnailImageUrl: doc.data().picture,
                         title: doc.data().title,
@@ -154,7 +155,8 @@ async function handleMessageEvent(event) {
         default:
             if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
                 let columns = []
-                noteSnapshot.get().forEach((doc) => {
+                const productsSnapshot = await DB.collection('Products').get();
+                productsSnapshot.forEach((doc) => {
                     let column = {
                         thumbnailImageUrl: doc.data().picture,
                         title: doc.data().title,
