@@ -207,9 +207,10 @@ async function handleMessageEvent(event) {
         };
     }
     else if (includesSome(eventText, ['debug'])) {
+        // Debug section
         msg = {
             type: 'text',
-            text: orderStatus
+            text: "Your order status >>> " + orderStatus
         };
     }
 
