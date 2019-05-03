@@ -25,7 +25,7 @@ function includesSome(text, wordList) {
 
 async function handleMessageEvent(event) {
     let eventText = event.message.text.toLowerCase();
-
+    console.log(event);
     if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
         let columns = []
         const noteSnapshot = await DB.collection('Products').get();
