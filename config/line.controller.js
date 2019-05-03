@@ -17,17 +17,18 @@ function handleEvent(event) {
 }
 
 function includesSome(text, list) {
-    list.forEach(function(element) {
+    var isFound = false
+    list.forEach((element) => {
         if (text.includes(element)) {
-            return true
+            isFound = true
+            break
         }
     })
-    return false
+    return isFound
 }
 
 function handleMessageEvent(event) {
     var eventText = event.message.text.toLowerCase();
-    console.log(eventText);
 
     // Default Reply Message
     var msg = {
