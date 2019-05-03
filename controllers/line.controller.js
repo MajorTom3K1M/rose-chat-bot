@@ -26,7 +26,9 @@ function includesSome(text, wordList) {
 async function handleMessageEvent(event) {
     let eventText = event.message.text.toLowerCase();
     const noteSnapshot = await DB.collection('Products').get();
-    console.log(noteSnapshot)
+    noteSnapshot.forEach((doc) => {
+        console.log(doc)
+    })
     const orderSnapshot = await DB.collection('Orders').get();
     console.log(orderSnapshot)
     let orderKey = orderSnapshot.find((doc) => {
