@@ -33,7 +33,7 @@ async function handleMessageEvent(event) {
         })
     })
     orderKey.then(result => console.log(result))
-    let orderStatus = orderKey.then(result => result != undefined) ? orderKey.data().status : "None"
+    let orderStatus = orderKey.then(result => result != undefined) ? orderKey.then(result => result.data().status) : "None"
     console.log(orderStatus)
 
     // Default Reply Message
