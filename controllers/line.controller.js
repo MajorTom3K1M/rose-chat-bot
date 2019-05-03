@@ -33,7 +33,7 @@ async function handleMessageEvent(event) {
         })
     })
     orderKey.then(result => console.log(result))
-    let orderStatus = orderKey.then(result => result != undefined) ? orderKey.then(result => result.data().status) : "None"
+    let orderStatus = orderKey.then(result => result === undefined) ? "None" : orderKey.then(result => result.data().status)
     console.log(orderStatus)
 
     // Default Reply Message
@@ -154,7 +154,6 @@ async function handleMessageEvent(event) {
         default:
             if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
                 let columns = []
-                const noteSnapshot = await DB.collection('Products').get();
                 noteSnapshot.get().forEach((doc) => {
                     let column = {
                         thumbnailImageUrl: doc.data().picture,
