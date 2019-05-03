@@ -31,12 +31,12 @@ async function handleMessageEvent(event) {
                     {
                         "type": "postback",
                         "label": "Add to cart",
-                        "data": "action=add&itemid="+doc.data().amount
+                        "data": "action=add&itemid="+doc.id
                     },
                     {
                         "type": "uri",
                         "label": "View detail",
-                        "uri": "http://example.com/page/"+doc.data().amount
+                        "uri": "http://example.com/page/"+doc.id
                     }
                 ]
             }

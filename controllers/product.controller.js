@@ -1,0 +1,59 @@
+const DB = require('./../config/firebase.config')
+const Validator = require("validatorjs");
+
+const addProduct = function (req, res) {
+    const rules = {
+        quantity: "required",
+        price: "required",
+        title: "required",
+        picture: "required|url"
+    };
+    let validation = new Validator(req.body, rules);
+    validation.passes(function () {
+        db.collection("Products").add({
+            quantity: req.body.quantity,
+            price: req.body.price,
+            title: req.body.title,
+            picture: req.body.picture
+        }).then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+            let respone = { status: true }
+            res.json(respone)
+        }).catch(function (error) {
+            console.error("Error adding document: ", error);
+            let respone = { status: false }
+            res.json(respone)
+        });
+    })
+    validation.fails(function () {
+        res.status(200).json(validation.errors)
+    })
+
+}
+const getProduct = async function (req, res) {
+    let columns = []
+    const noteSnapshot = await DB.collection('Products').get();
+    noteSnapshot.forEach(async (doc) => {
+        let column = {
+            thumbnailImageUrl: doc.data().picture,
+            title: doc.data().title,
+            text: "description",
+            "actions": [
+                {
+                    "type": "postback",
+                    "label": "Add to cart",
+                    "data": "action=add&itemid=" + doc.id
+                },
+                {
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "http://example.com/page/" + doc.id
+                }
+            ]
+        }
+        columns.push(column)
+    })
+    res.json(columns)
+}
+
+module.exports = { getProduct, addProduct };
