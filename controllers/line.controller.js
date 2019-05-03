@@ -13,16 +13,30 @@ function handleEvent(event) {
     }
 }
 
+function includesSome(text, wordList) {
+    var isFound = false
+    for (i in wordList) {
+        if (text.includes(wordList[i])) {
+            isFound = true
+            break
+        }
+    }
+    return isFound
+}
+
 async function handleMessageEvent(event) {
     var eventText = event.message.text.toLowerCase();
 
-    if(eventText.includes('รายการสินค้า')) {
+    // Default Reply Message
+    var msg = {
+        type: 'text',
+        text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
+    };
 
+    if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
         let columns = []
-
         const noteSnapshot = await DB.collection('Products').get();
         noteSnapshot.forEach(async (doc) => {
-    
             let column =  {
                 thumbnailImageUrl: doc.data().picture,
                 title: doc.data().title,
@@ -42,7 +56,6 @@ async function handleMessageEvent(event) {
             }
             columns.push(column)
         })
-
         msg = {
             type: "template",
             altText: "Shopping List",
@@ -51,6 +64,13 @@ async function handleMessageEvent(event) {
                 "columns": columns
             }
         }
+    }
+    // rude word filter
+    else if(includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
+        msg = {
+            type: 'text',
+            text: 'หนูดุนะ พี่ไหวหรอ'
+        };
     }
 
     return client.replyMessage(event.replyToken, msg);
