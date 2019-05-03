@@ -1,5 +1,5 @@
 const line = require('@line/bot-sdk');
-const ConfigLine = require('./../config/line.config')
+const { ConfigLine } = require('./../config/line.config')
 const DB = require('./../config/firebase.config')
 
 const client = new line.Client(ConfigLine);

@@ -3,4 +3,4 @@ const ConfigLine = {
     channelSecret: (process.env.channelSecret || "c627a11f0a43dea2f10b83bf0f0682e1")
 };
 
-module.exports = ConfigLine;
+module.exports = { ConfigLine };
