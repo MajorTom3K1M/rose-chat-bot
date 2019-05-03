@@ -41,16 +41,16 @@ async function handleMessageEvent(event) {
                 thumbnailImageUrl: doc.data().picture,
                 title: doc.data().title,
                 text: doc.data().price,
-                "actions": [
+                actions: [
                     {
-                        "type": "postback",
-                        "label": "Add to cart",
-                        "data": "action=add&itemid=1"
+                        type: "postback",
+                        label: "Add to cart",
+                        data: "action=add&itemid=1"
                     },
                     {
-                        "type": "uri",
-                        "label": "View detail",
-                        "uri": "https://blackpinkmerch.com/"
+                        type: "uri",
+                        label: "View detail",
+                        uri: "https://blackpinkmerch.com/"
                     }
                 ]
             }
@@ -60,8 +60,8 @@ async function handleMessageEvent(event) {
             type: "template",
             altText: "Shopping List",
             template: {
-                "type": "carousel",
-                "columns": columns
+                type: "carousel",
+                columns: columns
             }
         }
     }
