@@ -17,8 +17,8 @@ function handleEvent(event) {
 }
 
 function includesSome(text, list) {
-    list.map((key, item) => {
-        if(text.includes(item)) {
+    list.forEach(element => {
+        if(element.includes(item)) {
             console.log(text + " " + item)
             return true
         }
