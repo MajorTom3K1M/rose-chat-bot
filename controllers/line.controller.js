@@ -28,12 +28,12 @@ async function handleMessageEvent(event) {
     const noteSnapshot = await DB.collection('Products');
     const orderSnapshot = await DB.collection('Orders');
     let orderKey = orderSnapshot.get().then(querySnapshot => {
-        querySnapshot.docs.find((doc) => {
+        await querySnapshot.docs.find((doc) => {
             doc.data().clientId == event.source.userId && doc.data().status != "shipped" && doc.data().status != "cancelled"
         })
     })
-    console.log(orderKey)
-    let orderStatus = orderKey != undefined ? orderKey.data().status : "None"
+    orderKey.then(result => console.log(result))
+    let orderStatus = orderKey.then(result => result != undefined) ? orderKey.data().status : "None"
     console.log(orderStatus)
 
     // Default Reply Message
@@ -50,7 +50,10 @@ async function handleMessageEvent(event) {
                     type: 'text',
                     text: "จ่ายเงินแล้วจร้า กรุณาระบุทีสถานที่จัดส่งผ่านการ share location ด้วยค่ะ"
                 };
-                order.update({status: "shipping"})
+                let order = orderSnapshot.get().then(querySnapshot => {
+                    querySnapshot.docs.find((doc) => { doc.data().clientId == event.source.userId && doc.data().status == "paying" })
+                })
+                order.then(result => result.update({status: "shipping"}))
             }
             break;
         case "shipping":
@@ -60,7 +63,10 @@ async function handleMessageEvent(event) {
                     type: 'text',
                     text: "ได้รับสถานที่จัดส่งเรียบร้อยแล้วค่ะ ขอบคุณที่ใช้บริการคุณหนู Rose นะคะ สวัสดีค่ะ"
                 }
-                order.update({status: "shipped"})
+                let order = orderSnapshot.get().then(querySnapshot => {
+                    querySnapshot.docs.find((doc) => { doc.data().clientId == event.source.userId && doc.data().status == "shipping" })
+                })
+                order.then(result => result.update({status: "shipped"}))
             }
             break;
         case "shopping":
@@ -78,7 +84,7 @@ async function handleMessageEvent(event) {
                             {
                                 type: "postback",
                                 label: "Add to cart",
-                                data: "action=updateorder&itemid=" + doc.id + "&orderId=" + order.id
+                                data: "action=updateorder&itemid=" + doc.id + "&orderId=" + order.then(result => result.id)
                             },
                             {
                                 type: "uri",
@@ -104,13 +110,13 @@ async function handleMessageEvent(event) {
                 })
                 let orderText = "รายการสั่งซื้อ #" + order.id + "\n"
                 let totalPrice = 0
-                order.data().items.forEach((item) => {
+                order.then(result => result.data().items.forEach((item) => {
                     let product = noteSnapshot.get().then(querySnapshot => {
                         querySnapshot.docs.find((doc) => {doc.id == item.id}).data()
                     })
-                    totalPrice += parseFloat(product.price) * parseInt(item.qty)
+                    totalPrice += parseFloat(product.then(result => result.price)) * parseInt(item.qty)
                     orderText += product.title + " จำนวน " + item.qty + "\n"
-                })
+                }))
                 orderText += "ราคารวมทั้งหมด $" + totalPrice
                 msg = {
                     type: 'text',
@@ -123,26 +129,26 @@ async function handleMessageEvent(event) {
                 })
                 let paymentText = "รายการสั่งซื้อ #" + order.id + "\n"
                 let totalPrice = 0
-                order.data().items.forEach((item) => {
+                order.then(result => result.data().items.forEach((item) => {
                     let product = noteSnapshot.get().then(querySnapshot => {
                         querySnapshot.docs.find((doc) => {doc.id == item.id}).data()
                     })
-                    totalPrice += parseFloat(product.price) * parseInt(item.qty)
+                    totalPrice += parseFloat(product.then(result => result.price)) * parseInt(item.qty)
                     orderText += product.title + " จำนวน " + item.qty + "\n"
-                })
+                }))
                 paymentText += "ราคารวมทั้งหมด $" + totalPrice + "\n\n"
                 paymentText += "สามารถชำระเงินได้ที่ เลขบัญชี xxxxxxxxxxx พร้อมทั้งส่งหลักฐานการโอนเงินเข้ามาได้ผ่านทาง LINE นี้"
                 msg = {
                     type: 'text',
                     text: paymentText
                 };
-                order.update({status: "playing"})
+                order.then(result => result.update({status: "playing"}))
             }
             else if (includesSome(eventText, ['ยกเลิก', 'cancel'])) {
                 let order = orderSnapshot.get().then(querySnapshot => {
                     querySnapshot.docs.find((doc) => { doc.data().clientId == event.source.userId && doc.data().status == "shopping" })
                 })
-                order.update({status: "cancelled"})
+                order.then(result => result.update({status: "cancelled"}))
             }
             break;
         default:
@@ -186,7 +192,7 @@ async function handleMessageEvent(event) {
             querySnapshot.docs.filter((doc) => { doc.data().clientId == event.source.userId && doc.data().status == "shipped" })
         })
         let historyText = "ประวัติการสั่งซื้อของท่านทั้งหมด"
-        history.forEach((history) => {historyText += history.id + "\n"})
+        history.then(result => result.forEach((history) => {historyText += history.id + "\n"}))
         msg = {
             type: 'text',
             text: historyText
