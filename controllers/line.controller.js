@@ -77,4 +77,4 @@ async function handleMessageEvent(event) {
     }
 }
 
-module.exports = { ConfigLine, handleEvent, handleMessageEvent };
+module.exports = { config, handleEvent, handleMessageEvent };
