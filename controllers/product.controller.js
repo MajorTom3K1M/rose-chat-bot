@@ -48,7 +48,7 @@ const editProduct = async function (req, res) {
     validation.passes(async () => {
         await DB.collection('Products').doc(id).get()
         .then(async (snapshot) => {
-            console.log(snapshot.data().price)
+            //console.log(snapshot.data().price)
             let response = { update: true }
             await DB.collection('Products').doc(id).update({
                 quantity: quantity || quantity == "" ? quantity: snapshot.data().quantity,
@@ -82,5 +82,19 @@ const deleteProduct = async function (req, res) {
         res.status(404).json(validation.errors)
     })
 }
+const getProductById = async function (req, res) {
+    let { id } = req.params;
+    const rules = {
+        id: "required"
+    };
+    let validation = new Validator(req.params, rules);
+    validation.passes(async () => {
+        await DB.collection('Products').doc(id).get()
+        .then((snapshot) =>  res.status(200).json({id:snapshot.id,...snapshot.data()}));
+    })
+    validation.fails(() => {
+        res.status(404).json(validation.errors)
+    })
+}
 
-module.exports = { getProduct, addProduct, editProduct, deleteProduct };
+module.exports = { getProduct, addProduct, editProduct, deleteProduct, getProductById };
