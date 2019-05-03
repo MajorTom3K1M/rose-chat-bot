@@ -1,8 +1,8 @@
 const line = require('@line/bot-sdk');
-const { config } = require('./../config/line.config')
+const  configLine  = require('./../config/line.config')
 const DB = require('./../config/firebase.config')
 
-const client = new line.Client(config);
+const client = new line.Client(configLine);
 
 function handleEvent(event) {
     console.log(event);
@@ -77,4 +77,4 @@ async function handleMessageEvent(event) {
     }
 }
 
-module.exports = { config, handleEvent, handleMessageEvent };
+module.exports = handleEvent
