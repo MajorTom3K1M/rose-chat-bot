@@ -24,7 +24,7 @@ function includesSome(text, wordList) {
     return isFound
 }
 
-function handleMessageEvent(event) {
+async function handleMessageEvent(event) {
     var eventText = event.message.text.toLowerCase();
 
     // Default Reply Message
