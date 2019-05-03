@@ -14,17 +14,19 @@ function handleEvent(event) {
 }
 
 function includesSome(text, wordList) {
-    var isFound = false
+    console.log('hi')
+    let isFound = false
     for (i in wordList) {
         if (text.includes(wordList[i])) {
             isFound = true
             break
         }
     }
+    console.log('bye')
     return isFound
 }
 
-function handleMessageEvent(event) {
+async function handleMessageEvent(event) {
     var eventText = event.message.text.toLowerCase();
 
     // Default Reply Message
@@ -33,19 +35,21 @@ function handleMessageEvent(event) {
         text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
     };
 
+    console.log('gg')
+
     if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
         let columns = []
-        const noteSnapshot = DB.collection('Products').get();
-        noteSnapshot.forEach((doc) => {
+        const noteSnapshot = await DB.collection('Products').get();
+        noteSnapshot.forEach(async (doc) => {
             let column =  {
                 thumbnailImageUrl: doc.data().picture,
                 title: doc.data().title,
-                text: "$" + doc.data().price,
+                text: doc.data().price,
                 "actions": [
                     {
                         "type": "postback",
                         "label": "Add to cart",
-                        "data": "action=add&itemid=" + doc.id
+                        "data": "action=add&itemid=1"
                     },
                     {
                         "type": "uri",
