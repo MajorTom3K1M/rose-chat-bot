@@ -26,16 +26,14 @@ function includesSome(text, wordList) {
 async function handleMessageEvent(event) {
     let eventText = event.message.text.toLowerCase();
     const noteSnapshot = await DB.collection('Products').get();
-    const orderSnapshot = await DB.collection('Orders').get();
-    orderSnapshot.forEach((doc) => {
-        console.log(doc)
-    })
-    /*
-    let orderKey = orderSnapshot.find((doc) => {
-        doc.data().clientId == eventText.source.userId && doc.data().status != "shipped" && doc.data().status != "cancelled"
+    const orderSnapshot = await DB.collection('Orders');
+    let orderKey = orderSnapshot.get().then(querySnapshot => {
+        querySnapshot.docs.find(find((doc) => {
+            doc.data().clientId == eventText.source.userId && doc.data().status != "shipped" && doc.data().status != "cancelled"
+        }))
     })
     let orderStatus = orderKey.data().status != undefined ? orderKey.data().status : "None"
-    */
+    console.log(orderStatus)
 
     // Default Reply Message
     let msg = {
