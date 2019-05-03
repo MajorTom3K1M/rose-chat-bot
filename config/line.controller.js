@@ -16,14 +16,14 @@ function handleEvent(event) {
     }
 }
 
-function includesSome(text, list) {
+function includesSome(text, wordList) {
     var isFound = false
-    list.forEach((element) => {
+    for (word in wordList) {
         if (text.includes(element)) {
             isFound = true
             break
         }
-    })
+    }
     return isFound
 }
 
