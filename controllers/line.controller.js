@@ -13,7 +13,7 @@ function handleEvent(event) {
     }
 }
 
-function includesSome(text, wordList) {
+async function includesSome(text, wordList) {
     var isFound = false
     for (i in wordList) {
         if (text.includes(wordList[i])) {
