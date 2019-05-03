@@ -19,7 +19,7 @@ function handleEvent(event) {
 function includesSome(text, wordList) {
     var isFound = false
     for (word in wordList) {
-        if (text.includes(element)) {
+        if (text.includes(word)) {
             isFound = true
             break
         }
