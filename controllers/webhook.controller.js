@@ -1,10 +1,11 @@
-const { handleEvent } = require('./line.controller')
+const handleEvent = require('./line.controller')
 
 const WebHook = function (req, res) {
+    console.log(req);
+
     Promise
         .all(req.body.events.map(handleEvent))
-        .then((result) => res.json(result))
-        .catch(err => console.log(err));
+        .then((result) => res.status(200).json(result));
 }
 
 module.exports = WebHook;
