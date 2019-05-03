@@ -13,7 +13,7 @@ function handleEvent(event) {
     }
 }
 
-async function includesSome(text, wordList) {
+function includesSome(text, wordList) {
     var isFound = false
     for (i in wordList) {
         if (text.includes(wordList[i])) {
@@ -24,7 +24,7 @@ async function includesSome(text, wordList) {
     return isFound
 }
 
-async function handleMessageEvent(event) {
+function handleMessageEvent(event) {
     var eventText = event.message.text.toLowerCase();
 
     // Default Reply Message
@@ -37,12 +37,10 @@ async function handleMessageEvent(event) {
         let columns = []
         const noteSnapshot = await DB.collection('Products').get();
         noteSnapshot.forEach(async (doc) => {
-            let data = doc.data()
-            console.log(data)
             let column =  {
-                thumbnailImageUrl: doc.data.picture,
-                title: doc.data.title,
-                text: "$" + doc.data.price,
+                thumbnailImageUrl: doc.data().picture,
+                title: doc.data().title,
+                text: "$" + doc.data().price,
                 "actions": [
                     {
                         "type": "postback",
