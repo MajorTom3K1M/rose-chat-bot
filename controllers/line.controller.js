@@ -26,11 +26,7 @@ function includesSome(text, wordList) {
 async function handleMessageEvent(event) {
     let eventText = event.message.text.toLowerCase();
     const noteSnapshot = await DB.collection('Products').get();
-    noteSnapshot.forEach((doc) => {
-        console.log(doc)
-    })
-    const orderSnapshot = await DB.collection('Orders').get();
-    console.log(orderSnapshot)
+    const orderSnapshot = await DB.collection('Orders');
     let orderKey = orderSnapshot.find((doc) => {
         doc.data().clientId == eventText.source.userId && doc.data().status != "shipped" && doc.data().status != "cancelled"
     })
