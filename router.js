@@ -14,7 +14,7 @@ router.get('/product/:id', getProductById);
 router.post('/product',addProduct);
 router.put('/product/:id',editProduct);
 router.delete('/product/:id',deleteProduct);
-router.post('/order',createOrder);
-router.post('/updateorder/:orderid:itemid',updateUserOrder)
+router.post('/webhook/order',createOrder);
+router.post('/webhook/updateorder/:orderid:itemid',updateUserOrder)
 
 module.exports = router;
