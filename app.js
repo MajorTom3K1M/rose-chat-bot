@@ -14,12 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.use('/apis/', router);
 
-app.get('/', (req, res) => res.send('Rose Shop online!'))
+app.use('/',express.static(path.join(__dirname, 'build')));
 
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/adminpanel', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 app.listen(port, () => console.log(`Http app listening on port ${port}!`))
 

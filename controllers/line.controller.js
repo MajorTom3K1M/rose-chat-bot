@@ -1,8 +1,8 @@
 const line = require('@line/bot-sdk');
-const ConfigLine  = require('./../config/line.config')
+const  configLine  = require('./../config/line.config')
 const DB = require('./../config/firebase.config')
 
-const client = new line.Client(ConfigLine);
+const client = new line.Client(configLine);
 
 function handleEvent(event) {
     if (event.type === 'message' && event.message.type === 'text') {
@@ -24,55 +24,56 @@ function includesSome(text, wordList) {
 }
 
 async function handleMessageEvent(event) {
-    var eventText = event.message.text.toLowerCase();
+    let eventText = event.message.text.toLowerCase();
 
-    // Default Reply Message
-    var msg = {
-        type: 'text',
-        text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
-    };
-
-    if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
+    if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
         let columns = []
         const noteSnapshot = await DB.collection('Products').get();
-        noteSnapshot.forEach(async (doc) => {
-            let column =  {
+        noteSnapshot.forEach((doc) => {
+            let column = {
                 thumbnailImageUrl: doc.data().picture,
                 title: doc.data().title,
                 text: doc.data().price,
-                "actions": [
+                actions: [
                     {
-                        "type": "postback",
-                        "label": "Add to cart",
-                        "data": "action=add&itemid=1"
+                        type: "postback",
+                        label: "Add to cart",
+                        data: "action=add&itemid=1"
                     },
                     {
-                        "type": "uri",
-                        "label": "View detail",
-                        "uri": "https://blackpinkmerch.com/"
+                        type: "uri",
+                        label: "View detail",
+                        uri: "https://blackpinkmerch.com/"
                     }
                 ]
             }
             columns.push(column)
         })
-        msg = {
+        let msg = {
             type: "template",
             altText: "Shopping List",
             template: {
-                "type": "carousel",
-                "columns": columns
+                type: "carousel",
+                columns: columns
             }
         }
+        return client.replyMessage(event.replyToken, msg);
     }
     // rude word filter
-    else if(includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
-        msg = {
+    else if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
+        let msg = {
             type: 'text',
             text: 'หนูดุนะ พี่ไหวหรอ'
         };
+        return client.replyMessage(event.replyToken, msg);
+    } else {
+        // Default Reply Message
+        let msg = {
+            type: 'text',
+            text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
+        }
+        return client.replyMessage(event.replyToken, msg);
     }
-
-    return client.replyMessage(event.replyToken, msg);
 }
 
-module.exports = {ConfigLine, handleEvent, handleMessageEvent};
+module.exports = handleEvent
