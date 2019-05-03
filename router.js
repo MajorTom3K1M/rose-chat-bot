@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const line = require('@line/bot-sdk');
 
-const  ConfigLine  = require('./config/line.config');
+const ConfigLine = require('./config/line.config');
 
 const WebHook = require('./controllers/webhook.controller');
 const {getProduct, addProduct, editProduct, deleteProduct, getProductById } = require('./controllers/product.controller');

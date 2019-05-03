@@ -5,7 +5,6 @@ const DB = require('./../config/firebase.config')
 const client = new line.Client(ConfigLine);
 
 function handleEvent(event) {
-    console.log(event);
     if (event.type === 'message' && event.message.type === 'text') {
         handleMessageEvent(event);
     } else {
