@@ -32,7 +32,8 @@ async function handleMessageEvent(event) {
             doc.data().clientId == event.source.userId && doc.data().status != "shipped" && doc.data().status != "cancelled"
         })
     })
-    let orderStatus = orderKey.data().status != undefined ? orderKey.data().status : "None"
+    console.log(orderKey)
+    let orderStatus = orderKey != undefined ? orderKey.data().status : "None"
     console.log(orderStatus)
 
     // Default Reply Message
