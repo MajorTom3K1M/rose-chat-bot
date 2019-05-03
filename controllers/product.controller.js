@@ -34,7 +34,7 @@ const getProduct = async function (req, res) {
     let columns = []
     const noteSnapshot = await DB.collection('Products').get();
     noteSnapshot.forEach(async (doc) => {
-        columns.push(doc.data())
+        columns.push({id:doc.id,...doc.data()})
     })
     res.status(200).json(columns)
 }
@@ -57,8 +57,6 @@ const editProduct = async function (req, res) {
         }).then(() => {res.status(200).json(response);})
         .catch(() => {res.status(400).json({ update:false })})
     }).catch(() => { res.status(404).json({ id: "Not Found" }) })
-
-    
 }
 
 module.exports = { getProduct, addProduct, editProduct };
