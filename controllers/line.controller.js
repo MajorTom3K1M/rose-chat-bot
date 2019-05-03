@@ -28,7 +28,7 @@ async function handleMessageEvent(event) {
     const noteSnapshot = await DB.collection('Products');
     const orderSnapshot = await DB.collection('Orders');
     let orderKey = orderSnapshot.get().then(querySnapshot => {
-        await querySnapshot.docs.find((doc) => {
+        querySnapshot.docs.find((doc) => {
             doc.data().clientId == event.source.userId && doc.data().status != "shipped" && doc.data().status != "cancelled"
         })
     })
