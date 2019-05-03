@@ -14,7 +14,6 @@ function handleEvent(event) {
 }
 
 function includesSome(text, wordList) {
-    console.log('hi')
     let isFound = false
     for (i in wordList) {
         if (text.includes(wordList[i])) {
@@ -22,7 +21,6 @@ function includesSome(text, wordList) {
             break
         }
     }
-    console.log('bye')
     return isFound
 }
 
@@ -34,6 +32,46 @@ async function handleMessageEvent(event) {
         type: 'text',
         text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
     };
+
+    if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
+        let columns = []
+        const noteSnapshot = await DB.collection('Products').get();
+        noteSnapshot.forEach(async (doc) => {
+            let column =  {
+                thumbnailImageUrl: doc.data().picture,
+                title: doc.data().title,
+                text: doc.data().price,
+                "actions": [
+                    {
+                        "type": "postback",
+                        "label": "Add to cart",
+                        "data": "action=add&itemid=1"
+                    },
+                    {
+                        "type": "uri",
+                        "label": "View detail",
+                        "uri": "https://blackpinkmerch.com/"
+                    }
+                ]
+            }
+            columns.push(column)
+        })
+        msg = {
+            type: "template",
+            altText: "Shopping List",
+            template: {
+                "type": "carousel",
+                "columns": columns
+            }
+        }
+    }
+    // rude word filter
+    else if(includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
+        msg = {
+            type: 'text',
+            text: 'หนูดุนะ พี่ไหวหรอ'
+        };
+    }
 
     return client.replyMessage(event.replyToken, msg);
 }
