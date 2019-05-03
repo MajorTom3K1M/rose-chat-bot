@@ -35,8 +35,8 @@ async function handleMessageEvent(event) {
 
     if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
         let columns = []
-        const noteSnapshot = await DB.collection('Products').get();
-        noteSnapshot.forEach(async (doc) => {
+        const noteSnapshot = DB.collection('Products').get();
+        noteSnapshot.forEach((doc) => {
             let column =  {
                 thumbnailImageUrl: doc.data().picture,
                 title: doc.data().title,
