@@ -2,7 +2,7 @@ const DB = require('./../config/firebase.config')
 const Validator = require("validatorjs");
 
 const createOrder = function(req, res) {
-    let { clientId, itemId, quantity, price } = req.body;
+    let { clientId, itemId, qty, price } = req.body;
     const rules = {
         clientId: "required",
         itemId: "required",
@@ -11,7 +11,7 @@ const createOrder = function(req, res) {
     validation.passes(() => {
         DB.collection('Orders').add({
             clientId: clientId,
-            itemId: itemId,
+            items: itemId,
             status: "shopping"
         }).then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
@@ -26,6 +26,17 @@ const createOrder = function(req, res) {
     validation.fails(function () {
         res.status(400).json(validation.errors)
     })
+}
+const getUserOrder = function(req, res) {
+    let { clientId, itemId, quantity, price } = req.body;
+    const rules = {
+        clientId: "required",
+        itemId: "required",
+    };
+    let validation = new Validator(req.body, rules);
+    validation.passes(() => {
+
+    });
 }
 
 module.exports = { createOrder }
