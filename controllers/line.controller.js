@@ -33,12 +33,12 @@ async function handleMessageEvent(event) {
             let column = {
                 thumbnailImageUrl: doc.data().picture,
                 title: doc.data().title,
-                text: doc.data().price,
+                text: "$" + doc.data().price + " (คงเหลือ " + doc.data().quantity + " ชิ้น)",
                 actions: [
                     {
                         type: "postback",
                         label: "Add to cart",
-                        data: "action=add&itemid=" + doc.id
+                        data: "action=addItem&itemid=" + doc.id
                     },
                     {
                         type: "uri",
