@@ -34,24 +34,7 @@ const getProduct = async function (req, res) {
     let columns = []
     const noteSnapshot = await DB.collection('Products').get();
     noteSnapshot.forEach(async (doc) => {
-        let column = {
-            thumbnailImageUrl: doc.data().picture,
-            title: doc.data().title,
-            text: "description",
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=" + doc.id
-                },
-                {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/" + doc.id
-                }
-            ]
-        }
-        columns.push(column)
+        columns.push(doc.data())
     })
     res.json(columns)
 }
