@@ -13,7 +13,7 @@ function handleEvent(event) {
     }
 }
 
-function includesSome(text, wordList) {
+async function includesSome(text, wordList) {
     var isFound = false
     for (i in wordList) {
         if (text.includes(wordList[i])) {
@@ -37,20 +37,22 @@ async function handleMessageEvent(event) {
         let columns = []
         const noteSnapshot = await DB.collection('Products').get();
         noteSnapshot.forEach(async (doc) => {
+            let data = doc.data()
+            console.log(data)
             let column =  {
-                thumbnailImageUrl: doc.data().picture,
-                title: doc.data().title,
-                text: "description",
+                thumbnailImageUrl: doc.data.picture,
+                title: doc.data.title,
+                text: "$" + doc.data.price,
                 "actions": [
                     {
                         "type": "postback",
                         "label": "Add to cart",
-                        "data": "action=add&itemid="+doc.id
+                        "data": "action=add&itemid=" + doc.id
                     },
                     {
                         "type": "uri",
                         "label": "View detail",
-                        "uri": "http://example.com/page/"+doc.id
+                        "uri": "https://blackpinkmerch.com/"
                     }
                 ]
             }
