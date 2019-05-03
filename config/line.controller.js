@@ -44,36 +44,36 @@ function handleMessageEvent(event) {
                 "type": "carousel",
                 "columns": [
                     {
-                        "thumbnailImageUrl": "https://www.thesun.co.uk/wp-content/uploads/2017/03/fifa-17-2.jpg?strip=all&w=742&quality=100",
-                        "title": "this is menu",
-                        "text": "description",
+                        "thumbnailImageUrl": "https://blackpinkmerch.com/blackpink-kill-this-love-black-version/",
+                        "title": "BLACKPINK Kill This Love Black Ver.",
+                        "text": "$24.99",
                         "actions": [
                             {
                                 "type": "postback",
-                                "label": "Add to cart",
+                                "label": "ใส่ลงตะกร้าสินค้า",
                                 "data": "action=add&itemid=111"
                             },
                             {
                                 "type": "uri",
-                                "label": "View detail",
-                                "uri": "http://example.com/page/111"
+                                "label": "ดูรายละเอียด",
+                                "uri": "https://blackpinkmerch.com/blackpink-kill-this-love-black-version/"
                             }
                         ]
                     },
                     {
-                        "thumbnailImageUrl": "https://www.thesun.co.uk/wp-content/uploads/2017/03/fifa-17-2.jpg?strip=all&w=742&quality=100",
-                        "title": "this is menu",
-                        "text": "description",
+                        "thumbnailImageUrl": "https://blackpinkmerch.com/blackpink-official-light-stick/",
+                        "title": "BLACKPINK Official Light Stick",
+                        "text": "$21.77",
                         "actions": [
                             {
                                 "type": "postback",
-                                "label": "Add to cart",
+                                "label": "ใส่ลงตะกร้าสินค้า",
                                 "data": "action=add&itemid=222"
                             },
                             {
                                 "type": "uri",
-                                "label": "View detail",
-                                "uri": "http://example.com/page/222"
+                                "label": "ดูรายละเอียด",
+                                "uri": "https://blackpinkmerch.com/blackpink-official-light-stick/"
                             }
                         ]
                     }
