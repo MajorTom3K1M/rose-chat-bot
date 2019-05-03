@@ -9,6 +9,7 @@ require('dotenv').config();
 let app = express();
 let router = require('./router')
 
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.use('/apis/', router);
