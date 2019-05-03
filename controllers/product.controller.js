@@ -36,7 +36,29 @@ const getProduct = async function (req, res) {
     noteSnapshot.forEach(async (doc) => {
         columns.push(doc.data())
     })
-    res.json(columns)
+    res.status(200).json(columns)
+}
+const editProduct = async function (req, res) {
+    let { id } = req.params;
+    let { quantity, price, title, picture } = req.body;
+    const rules = {
+        id: "required"
+    };
+    let validation = new Validator(req.body, rules);
+    await DB.collection('Products').doc(id).get()
+    .then(async (snapshot) => {
+        console.log(snapshot.data().price)
+        let response = { update: true }
+        await DB.collection('Products').doc(id).update({
+            quantity: quantity || quantity == "" ? quantity: snapshot.data().quantity,
+            price: price || price == "" ? price: snapshot.data().price,
+            title: title || title == "" ? title: snapshot.data().title,
+            picture: picture || picture == "" ? picture: snapshot.data().picture,
+        }).then(() => {res.status(200).json(response);})
+        .catch(() => {res.status(400).json({ update:false })})
+    }).catch(() => { res.status(404).json({ id: "Not Found" }) })
+
+    
 }
 
-module.exports = { getProduct, addProduct };
+module.exports = { getProduct, addProduct, editProduct };
