@@ -18,8 +18,8 @@ function handleEvent(event) {
 
 function includesSome(text, wordList) {
     var isFound = false
-    for (word in wordList) {
-        if (text.includes(word)) {
+    for (i in wordList) {
+        if (text.includes(wordList[i])) {
             isFound = true
             break
         }
