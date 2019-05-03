@@ -16,6 +16,15 @@ function handleEvent(event) {
     }
 }
 
+function includesSome(text, list) {
+    list.map((item) => {
+        if(text.includes(item)) {
+            return true
+        }
+    })
+    return false
+}
+
 function handleMessageEvent(event) {
     var eventText = event.message.text.toLowerCase();
     console.log(eventText);
@@ -23,10 +32,10 @@ function handleMessageEvent(event) {
     // Default Reply Message
     var msg = {
         type: 'text',
-        text: 'Hi, Friend'
+        text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
     };
 
-    if(eventText.includes(['รายการสินค้า'])) {
+    if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
         msg = {
             "type": "template",
             "altText": "Shopping List",
