@@ -1,0 +1,96 @@
+const line = require('@line/bot-sdk');
+
+const config = {
+    channelAccessToken: (process.env.channelAccessToken || "JtnZ4tiXAhiJ0jI6Qc1zgWO50aoV/9ui1Kpekakk/i5xmRbgW4yFPexy3PEv7Gm8aYEXrotpYAuTWQQfuQ9bJxo96pQPIt3T2zMZbvAu/hWnZB4Oqox8tMW8Az3xAjKGR1j6XClorkwPLto82cN+TQdB04t89/1O/w1cDnyilFU="),
+    channelSecret: (process.env.channelSecret || "7e11260ef38889493c9bc7d212aa9866")
+};
+
+const client = new line.Client(config);
+
+function handleEvent(event) {
+    console.log(event);
+    if (event.type === 'message' && event.message.type === 'text') {
+        handleMessageEvent(event);
+    } else {
+        return Promise.resolve(null);
+    }
+}
+
+function includesSome(text, wordList) {
+    var isFound = false
+    for (i in wordList) {
+        if (text.includes(wordList[i])) {
+            isFound = true
+            break
+        }
+    }
+    return isFound
+}
+
+function handleMessageEvent(event) {
+    var eventText = event.message.text.toLowerCase();
+
+    // Default Reply Message
+    var msg = {
+        type: 'text',
+        text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
+    };
+
+    if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
+        msg = {
+            "type": "template",
+            "altText": "Shopping List",
+            "template": {
+                "type": "carousel",
+                "columns": [
+                    {
+                        "thumbnailImageUrl": "https://blackpinkmerch.com/blackpink-kill-this-love-black-version/",
+                        "title": "BLACKPINK Kill This Love Black Ver.",
+                        "text": String("ของคงเหลือ " + "3" + " ชิ้น"),
+                        "actions": [
+                            {
+                                "type": "postback",
+                                "label": String("ใส่ลงตะกร้าสินค้า (ราคา " + "$24.99" + ")"),
+                                "data": "action=add&itemid=111"
+                            },
+                            {
+                                "type": "uri",
+                                "label": "ดูรายละเอียด",
+                                "uri": "https://blackpinkmerch.com/blackpink-kill-this-love-black-version/"
+                            }
+                        ]
+                    },
+                    {
+                        "thumbnailImageUrl": "https://blackpinkmerch.com/blackpink-official-light-stick/",
+                        "title": "BLACKPINK Official Light Stick",
+                        "text": String("ของคงเหลือ " + "2" + " ชิ้น"),
+                        "actions": [
+                            {
+                                "type": "postback",
+                                "label": String("ใส่ลงตะกร้าสินค้า (ราคา " + "$21.77" + ")"),
+                                "data": "action=add&itemid=222"
+                            },
+                            {
+                                "type": "uri",
+                                "label": "ดูรายละเอียด",
+                                "uri": "https://blackpinkmerch.com/blackpink-official-light-stick/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    // rude word filter
+    else if(includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
+        msg = {
+            type: 'text',
+            text: 'หนูดุนะ พี่ไหวหรอ'
+        };
+    }
+
+
+    return client.replyMessage(event.replyToken, msg);
+}
+
+module.exports = {config, handleEvent, handleMessageEvent};
