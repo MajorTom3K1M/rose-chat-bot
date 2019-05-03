@@ -46,11 +46,11 @@ function handleMessageEvent(event) {
                     {
                         "thumbnailImageUrl": "https://blackpinkmerch.com/blackpink-kill-this-love-black-version/",
                         "title": "BLACKPINK Kill This Love Black Ver.",
-                        "text": "ของคงเหลือ " + "3" + " ชิ้น",
+                        "text": ("ของคงเหลือ " + "3" + " ชิ้น"),
                         "actions": [
                             {
                                 "type": "postback",
-                                "label": "ใส่ลงตะกร้าสินค้า (ราคา " + "$24.99" + ")",
+                                "label": ("ใส่ลงตะกร้าสินค้า (ราคา " + "$24.99" + ")"),
                                 "data": "action=add&itemid=111"
                             },
                             {
@@ -63,11 +63,11 @@ function handleMessageEvent(event) {
                     {
                         "thumbnailImageUrl": "https://blackpinkmerch.com/blackpink-official-light-stick/",
                         "title": "BLACKPINK Official Light Stick",
-                        "text": "ของคงเหลือ " + "2" + " ชิ้น",
+                        "text": ("ของคงเหลือ " + "2" + " ชิ้น"),
                         "actions": [
                             {
                                 "type": "postback",
-                                "label": "ใส่ลงตะกร้าสินค้า (ราคา " + "$21.77" + ")",
+                                "label": ("ใส่ลงตะกร้าสินค้า (ราคา " + "$21.77" + ")"),
                                 "data": "action=add&itemid=222"
                             },
                             {
