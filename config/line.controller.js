@@ -81,6 +81,12 @@ function handleMessageEvent(event) {
             }
         }
     }
+    else if(includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
+        msg = {
+            type: 'text',
+            text: 'หนูดุนะ พี่ไหวหรอ'
+        };
+    }
 
 
     return client.replyMessage(event.replyToken, msg);
