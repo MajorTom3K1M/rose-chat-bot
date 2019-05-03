@@ -35,48 +35,6 @@ async function handleMessageEvent(event) {
         text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
     };
 
-    console.log('gg')
-
-    if(includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
-        let columns = []
-        const noteSnapshot = await DB.collection('Products').get();
-        noteSnapshot.forEach(async (doc) => {
-            let column =  {
-                thumbnailImageUrl: doc.data().picture,
-                title: doc.data().title,
-                text: doc.data().price,
-                "actions": [
-                    {
-                        "type": "postback",
-                        "label": "Add to cart",
-                        "data": "action=add&itemid=1"
-                    },
-                    {
-                        "type": "uri",
-                        "label": "View detail",
-                        "uri": "https://blackpinkmerch.com/"
-                    }
-                ]
-            }
-            columns.push(column)
-        })
-        msg = {
-            type: "template",
-            altText: "Shopping List",
-            template: {
-                "type": "carousel",
-                "columns": columns
-            }
-        }
-    }
-    // rude word filter
-    else if(includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
-        msg = {
-            type: 'text',
-            text: 'หนูดุนะ พี่ไหวหรอ'
-        };
-    }
-
     return client.replyMessage(event.replyToken, msg);
 }
 
