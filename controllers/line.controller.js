@@ -35,6 +35,11 @@ const handleMessageEvent = async (event) => {
             msg = handleDefaultState(event)
             break;
     }
+
+    if(msg instanceof Promise) {
+        msg = msg.then(r => r)
+    }
+
     return client.replyMessage(event.replyToken, msg);
 }
 
