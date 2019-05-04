@@ -5,7 +5,7 @@ const createOrderHandler = require('../actions/message/createOrderHandler')
 const rudeWordHanlder = require('../actions/message/rudeWordHandler')
 const showHistoryHandler = require('../actions/message/showHistoryHandler')
 
-function handleShoppingState(event) {
+function handleDefaultState(event) {
   let msg = {
     type: 'text',
     text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
@@ -28,4 +28,4 @@ function handleShoppingState(event) {
   return msg
 }
 
-module.exports = handleShoppingState
+module.exports = handleDefaultState
