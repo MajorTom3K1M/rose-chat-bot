@@ -3,7 +3,7 @@ const DB = require('../../config/firebase.config')
 const createOrderHandler = async (event) => {
   const productsSnapshot = await DB.collection('Products').get()
   let columns = []
-  productsSnapshot.then(result => result.forEach(doc => {
+  productsSnapshot.forEach(doc => {
     let column = {
       thumbnailImageUrl: doc.data().picture,
       title: doc.data().title,
@@ -22,7 +22,7 @@ const createOrderHandler = async (event) => {
       ]
     }
     columns.push(column)
-  }))
+  })
 
   let msg = {
       type: "template",
