@@ -12,6 +12,11 @@ const client = new line.Client(configLine);
 
 async function handleMessageEvent(event) {
     let orderStatus = resolveOrderStatus(event)
+    let msg = {
+        type: 'text',
+        text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
+    }
+    
     switch(orderStatus) {
         case "paying":
             if (event.message.type === "sticker") {
@@ -30,7 +35,6 @@ async function handleMessageEvent(event) {
             msg = handleDefaultState(event)
             break;
     }
-
     return client.replyMessage(event.replyToken, msg);
 }
 
