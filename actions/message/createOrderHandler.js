@@ -4,7 +4,7 @@ const createOrderHandler = async (event) => {
   const productsSnapshot = await DB.collection('Products').get()
   let columns = []
   console.log(productsSnapshot)
-  productsSnapshot.forEach(async (doc) => {
+  productsSnapshot.then(result => result.forEach(async (doc) => {
     let column = {
       thumbnailImageUrl: doc.data().picture,
       title: doc.data().title,
@@ -23,7 +23,7 @@ const createOrderHandler = async (event) => {
       ]
     }
     columns.push(column)
-  })
+  }))
 
   let msg = {
       type: "template",
