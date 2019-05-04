@@ -1,17 +1,17 @@
 const line = require('@line/bot-sdk');
-const configLine = require('../config/line.config')
-
-const resolveOrderStatus = require('../util/resolveOrderStatus')
-const handleShoppingState = require('../util/handleShoppingState')
-const handleDefaultState = require('../util/handleDefaultState')
-
-const paymentHandler = require('../actions/image/paymentHandler')
-const shippingHandler = require('../actions/location/shippingHandler')
-
+const configLine = require('../../config/line.config')
 const client = new line.Client(configLine);
 
-const handleMessageEvent = async (event) => {
+const resolveOrderStatus = require('../../util/resolveOrderStatus')
+const handleShoppingState = require('../../util/handleShoppingState')
+const handleDefaultState = require('../../util/handleDefaultState')
+
+const paymentHandler = require('../image/paymentHandler')
+const shippingHandler = require('../location/shippingHandler')
+
+module.exports = function handleMessageEvent(event) {
     let orderStatus = resolveOrderStatus(event)
+
     let msg = {
         type: 'text',
         text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
@@ -36,9 +36,8 @@ const handleMessageEvent = async (event) => {
             break;
     }
 
-    console.log("controller " + msg)
-
+    console.log("messageEventHandler " + msg)
     return client.replyMessage(event.replyToken, msg);
 }
 
-module.exports = handleMessageEvent
+

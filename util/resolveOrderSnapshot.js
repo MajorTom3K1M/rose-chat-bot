@@ -6,7 +6,7 @@ const resolveOrderSnapshot = async (event, status) => {
                 .then(querySnapshot => {
                   querySnapshot.docs
                     .find(doc => { 
-                      doc.data().clientId == event.source.userId && doc.data().status == status 
+                      doc.data().clientId === event.source.userId && doc.data().status === status 
                     })
                 })
   return order
