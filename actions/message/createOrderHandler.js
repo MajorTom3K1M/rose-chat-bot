@@ -1,6 +1,6 @@
 const DB = require('../../config/firebase.config')
 
-const createOrderHandler = async (event) => {
+module.exports = createOrderHandler = async event => {
   const productsSnapshot = await DB.collection('Products').get()
   let columns = []
   productsSnapshot.forEach(doc => {
@@ -37,5 +37,3 @@ const createOrderHandler = async (event) => {
 
   return msg
 }
-
-module.exports = createOrderHandler

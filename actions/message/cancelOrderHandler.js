@@ -1,9 +1,11 @@
 const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
 
-const cancelOrderHandler = async (event) => {
-  let order = resolveOrderSnapshot(event, 'shopping')
-  order.then(result => result.update({status: "cancelled"}))
-  return msg
-}
+module.exports = cancelOrderHandler = event => {
+  resolveOrderSnapshot(event, 'shopping')
+    .then(result => result.update({status: "cancelled"}))
 
-module.exports = cancelOrderHandler
+  return msg = {
+      type: 'text',
+      text: 'ยกเลิกรายการปัจจุบัน'
+  }
+}

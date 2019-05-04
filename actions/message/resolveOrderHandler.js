@@ -27,7 +27,7 @@ const resolveOrderHandler = async (event) => {
   let msg = {
       type: 'text',
       text: paymentText
-  };
+  }
 
   order.then(result => result.update({status: "playing"}))
 
