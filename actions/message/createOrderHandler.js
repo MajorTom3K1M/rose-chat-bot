@@ -1,6 +1,6 @@
-const DB = require('../config/firebase.config')
+const DB = require('../../config/firebase.config')
 
-const createOrderHandler = (event) => {
+const createOrderHandler = async (event) => {
   const productsSnapshot = await DB.collection('Products').get();
   let columns = []
   productsSnapshot.forEach(doc => {
@@ -24,7 +24,7 @@ const createOrderHandler = (event) => {
     columns.push(column)
   })
 
-  msg = {
+  let smsg = {
       type: "template",
       altText: "Shopping List",
       template: {

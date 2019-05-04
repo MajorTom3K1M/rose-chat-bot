@@ -1,6 +1,6 @@
-const DB = require('../../config/firebase.config')
+const DB = require('../config/firebase.config')
 
-const resolveOrderStatus = (event) => {
+const resolveOrderStatus = async (event) => {
   const orderSnapshot = await DB.collection('Orders');
   let orderKey = orderSnapshot.get()
                   .then(querySnapshot => {

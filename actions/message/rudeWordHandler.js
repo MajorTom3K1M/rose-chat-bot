@@ -1,6 +1,4 @@
-const DB = require('../config/firebase.config')
-
-const showHistoryHandler = (event) => {
+const rudeWordHandler = (event) => {
   let msg = {
     type: 'text',
     text: 'หนูดุนะ พี่ไหวหรอ'
@@ -9,4 +7,4 @@ const showHistoryHandler = (event) => {
   return msg
 }
 
-module.exports = showHistoryHandler
+module.exports = rudeWordHandler

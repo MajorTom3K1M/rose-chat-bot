@@ -1,6 +1,6 @@
-const DB = require('../config/firebase.config')
+const DB = require('../../config/firebase.config')
 
-const showHistoryHandler = (event) => {
+const showHistoryHandler = async (event) => {
   const orderSnapshot = await DB.collection('Orders');
   let history = orderSnapshot.get()
                   .then(querySnapshot => {

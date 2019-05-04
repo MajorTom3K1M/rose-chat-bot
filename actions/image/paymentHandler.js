@@ -1,6 +1,6 @@
-const DB = require('../config/firebase.config')
+const DB = require('../../config/firebase.config')
 
-const paymentHandler = (event) => {
+const paymentHandler = async (event) => {
   const orderSnapshot = await DB.collection('Orders');
 
   let msg = {
