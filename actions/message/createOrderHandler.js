@@ -24,7 +24,7 @@ const createOrderHandler = async (event) => {
     columns.push(column)
   })
 
-  let smsg = {
+  let msg = {
       type: "template",
       altText: "Shopping List",
       template: {

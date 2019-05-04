@@ -1,16 +1,7 @@
-const DB = require('../../config/firebase.config')
+const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
 
 const cancelOrderHandler = async (event) => {
-  const orderSnapshot = await DB.collection('Orders');
-
-  let order = orderSnapshot.get()
-                .then(querySnapshot => {
-                  querySnapshot.docs
-                    .find(doc => { 
-                      doc.data().clientId == event.source.userId && doc.data().status == "shopping" 
-                    })
-                })
-
+  let order = resolveOrderSnapshot(event, 'shopping')
   order.then(result => result.update({status: "cancelled"}))
   return msg
 }
