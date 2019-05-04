@@ -1,4 +1,4 @@
-const DB = require('./../config/firebase.config')
+const DB = require('../config/firebase.config')
 const Validator = require("validatorjs");
 
 const addProduct = function (req, res) {
