@@ -1,20 +1,13 @@
 const DB = require('../../config/firebase.config')
+const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
 
 const resolveOrderHandler = async (event) => {
-  const orderSnapshot = await DB.collection('Orders');
-
-  let order = orderSnapshot.get()
-                .then(querySnapshot => {
-                  querySnapshot
-                  .docs
-                  .find(doc => { 
-                    doc.data().clientId == event.source.userId && doc.data().status == "shopping"
-                  })
-                })
+  let order = resolveOrderSnapshot(event, 'shopping')
 
   let paymentText = "รายการสั่งซื้อ #" + order.id + "\n"
   let totalPrice = 0
 
+  let noteSnapshot = DB.collection('Product')
   order.then(result => result.data()
                         .items
                         .forEach(item => {
@@ -25,7 +18,7 @@ const resolveOrderHandler = async (event) => {
                                             }).data()
                                           })
                           totalPrice += parseFloat(product.then(result => result.price)) * parseInt(item.qty)
-                          orderText += product.title + " จำนวน " + item.qty + "\n"
+                          paymentText += product.title + " จำนวน " + item.qty + "\n"
                         }))
 
   paymentText += "ราคารวมทั้งหมด $" + totalPrice + "\n\n"
@@ -36,9 +29,7 @@ const resolveOrderHandler = async (event) => {
       text: paymentText
   };
 
-  order.then(result => result.update({
-                        status: "playing"
-                      }))
+  order.then(result => result.update({status: "playing"}))
 
   return msg
 }

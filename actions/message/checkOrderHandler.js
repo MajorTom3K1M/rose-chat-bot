@@ -1,17 +1,12 @@
+const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
 const DB = require('../../config/firebase.config')
 
 const checkOrderHandler = async (event) => {
-  const orderSnapshot = await DB.collection('Orders');
-  let order = orderSnapshot.get()
-                .then(querySnapshot => {
-                  querySnapshot.docs
-                    .find(doc => { 
-                      doc.data().clientId == event.source.userId && doc.data().status == "shopping" 
-                    })
-                })
-
+  let order = resolveOrderSnapshot(event, 'shopping')
   let orderText = "รายการสั่งซื้อ #" + order.id + "\n"
   let totalPrice = 0
+  let noteSnapshot = DB.collection('Product')
+
   order.then(result => result.data()
                         .items
                         .forEach(item => {
