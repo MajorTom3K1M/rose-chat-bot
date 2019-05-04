@@ -27,6 +27,8 @@ const handleDefaultState = (event) => {
     msg = debugHandler(event)
   }
 
+  console.log(msg)
+
   return msg
 }
 
