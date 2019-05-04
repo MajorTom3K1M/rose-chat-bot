@@ -1,6 +1,6 @@
 const handleMessageEvent = require('../controllers/line.controller')
 
-function handleEvent(event) {
+const handleEvent = (event) => {
   if (event.type === 'message' && event.message.type === 'text') {
       handleMessageEvent(event);
   } else {
