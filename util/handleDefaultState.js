@@ -1,4 +1,4 @@
-const includesSome = require('../util/includesSome')
+const includesSome = require('./includesSome')
 
 const debugHandler = require('../actions/debug/debugHandler')
 const createOrderHandler = require('../actions/message/createOrderHandler')
