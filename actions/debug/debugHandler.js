@@ -6,3 +6,5 @@ const debugHandler = (event) => {
   
   return msg
 }
+
+module.exports = debugHandler
