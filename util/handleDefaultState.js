@@ -5,13 +5,15 @@ const createOrderHandler = require('../actions/message/createOrderHandler')
 const rudeWordHanlder = require('../actions/message/rudeWordHandler')
 const showHistoryHandler = require('../actions/message/showHistoryHandler')
 
-function handleDefaultState(event) {
+const handleDefaultState = (event) => {
   let msg = {
     type: 'text',
     text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
   }
 
   let eventText = event.message.text.toLowerCase()
+  console.log(eventText)
+
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
     msg = createOrderHandler(event)
   }
