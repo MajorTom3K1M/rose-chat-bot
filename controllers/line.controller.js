@@ -36,9 +36,7 @@ const handleMessageEvent = async (event) => {
             break;
     }
 
-    if(msg instanceof Promise) {
-        msg = msg.then(r => r)
-    }
+    console.log("controller " + msg)
 
     return client.replyMessage(event.replyToken, msg);
 }

@@ -33,6 +33,8 @@ const createOrderHandler = async (event) => {
       }
   }
 
+  console.log("create " + msg)
+
   return msg
 }
 
