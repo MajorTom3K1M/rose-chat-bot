@@ -15,20 +15,19 @@ const handleDefaultState = (event) => {
   console.log(eventText)
 
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
-    msg = createOrderHandler(event)
+    msg = createOrderHandler(event).then(result => result)
   }
   else if (includesSome(eventText, ['ประวัติการสั่งซื้อ', 'history'])) {
-    msg = showHistoryHandler(event)
+    msg = showHistoryHandler(event).then(result => result)
   }
   else if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
-    msg = rudeWordHanlder(event)
+    msg = rudeWordHanlder(event).then(result => result)
   }
   else if (includesSome(eventText, ['debug'])) {
-    msg = debugHandler(event)
+    msg = debugHandler(event).then(result => result)
   }
 
-  console.log(msg)
-
+  console.log(msg.then(result => result))
   return msg
 }
 
