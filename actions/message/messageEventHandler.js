@@ -32,9 +32,7 @@ module.exports = handleMessageEvent = event => {
             msg = handleShoppingState(event)
             break;
         default:
-            defaultPromise = handleDefaultState(event)
-            console.log("defaultPromise " + defaultPromise)
-            msg = defaultPromise.then(r => r)
+            msg = handleDefaultState(event)
             break;
     }
 
