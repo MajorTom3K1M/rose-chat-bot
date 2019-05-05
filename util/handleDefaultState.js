@@ -5,7 +5,7 @@ const createOrderHandler = require('../actions/message/createOrderHandler')
 const rudeWordHanlder = require('../actions/message/rudeWordHandler')
 const showHistoryHandler = require('../actions/message/showHistoryHandler')
 
-const handleDefaultState = async (event) => {
+const handleDefaultState = event => {
   let msg = {
     type: 'text',
     text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
