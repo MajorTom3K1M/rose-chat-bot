@@ -5,7 +5,7 @@ const createOrderHandler = require('../actions/message/createOrderHandler')
 const rudeWordHanlder = require('../actions/message/rudeWordHandler')
 const showHistoryHandler = require('../actions/message/showHistoryHandler')
 
-const handleDefaultState = event => {
+const handleDefaultState = async event => {
   let msg = {
     type: 'text',
     text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
@@ -14,15 +14,13 @@ const handleDefaultState = event => {
   let eventText = event.message.text.toLowerCase()
 
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
-    msg = createOrderHandler(event)
-    Promise.resolve(msg)
-      .then(result => msg = result)
+    msg = await createOrderHandler(event)
   }
   else if (includesSome(eventText, ['ประวัติการสั่งซื้อ', 'history'])) {
-    msg = showHistoryHandler(event)
+    msg = await showHistoryHandler(event)
   }
   else if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
-    msg = rudeWordHanlder(event).then(result => result)
+    msg = rudeWordHanlder(event)
   }
   else if (includesSome(eventText, ['debug'])) {
     msg = debugHandler(event)
