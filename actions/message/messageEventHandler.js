@@ -9,7 +9,7 @@ const handleDefaultState = require('../../util/handleDefaultState')
 const paymentHandler = require('../image/paymentHandler')
 const shippingHandler = require('../location/shippingHandler')
 
-module.exports = function handleMessageEvent(event) {
+module.exports = handleMessageEvent = event => {
     let orderStatus = resolveOrderStatus(event)
 
     let msg = {
@@ -33,6 +33,7 @@ module.exports = function handleMessageEvent(event) {
             break;
         default:
             defaultPromise = handleDefaultState(event)
+            console.log("defaultPromise " + defaultPromise)
             msg = defaultPromise.then(r => r)
             break;
     }
