@@ -15,6 +15,8 @@ const handleDefaultState = event => {
 
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
     msg = createOrderHandler(event)
+    Promise.resolve(msg)
+      .then(result => msg = result)
   }
   else if (includesSome(eventText, ['ประวัติการสั่งซื้อ', 'history'])) {
     msg = showHistoryHandler(event)
