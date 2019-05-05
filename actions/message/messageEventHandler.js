@@ -32,7 +32,10 @@ module.exports = handleMessageEvent = event => {
             msg = handleShoppingState(event)
             break;
         default:
-            msg = handleDefaultState(event)
+            handleDefaultState(event)
+                .then(result => {
+                    msg = result
+                })
             break;
     }
 
