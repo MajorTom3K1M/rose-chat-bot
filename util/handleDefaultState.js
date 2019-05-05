@@ -10,11 +10,9 @@ const handleDefaultState = event => {
 
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
     return msg = createOrderHandler(event)
-                  .then(result => result)
   }
   else if (includesSome(eventText, ['ประวัติการสั่งซื้อ', 'history'])) {
     return msg = showHistoryHandler(event)
-                  .then(result => result)
   }
   else if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
     return rudeWordHanlder(event)

@@ -36,6 +36,9 @@ module.exports = handleMessageEvent = event => {
             break;
     }
 
-    console.log("messageEventHandler " + msg)
-    return client.replyMessage(event.replyToken, msg);
+    return Promise.resolve(msg)
+        .then(result => {
+            console.log("messageEventHandler " + result)
+            client.replyMessage(event.replyToken, result);
+        })
 }
