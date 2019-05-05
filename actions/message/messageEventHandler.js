@@ -35,6 +35,8 @@ module.exports = handleMessageEvent = event => {
             handleDefaultState(event)
                 .then(result => {
                     msg = result
+                    console.log("res " + result)
+                    console.log("msg " + msg)
                 })
             break;
     }
@@ -42,5 +44,3 @@ module.exports = handleMessageEvent = event => {
     console.log("messageEventHandler " + msg)
     return client.replyMessage(event.replyToken, msg);
 }
-
-
