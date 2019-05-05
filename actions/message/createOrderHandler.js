@@ -2,6 +2,7 @@ const DB = require('../../config/firebase.config')
 
 module.exports = createOrderHandler = async event => {
   let productsCollection = await DB.collection('Products').get()
+
   let columns = []
   productsCollection.forEach(doc => {
     columns.push({
@@ -24,11 +25,11 @@ module.exports = createOrderHandler = async event => {
   })
 
   return msg = {
-      type: "template",
-      altText: "Shopping List",
-      template: {
-        type: "carousel",
-        columns: columns
-      }
+    type: "template",
+    altText: "Shopping List",
+    template: {
+      type: "carousel",
+      columns: columns
+    }
   }
 }
