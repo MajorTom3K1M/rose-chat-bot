@@ -4,7 +4,7 @@ module.exports = createOrderHandler = async event => {
   let productsCollection = await DB.collection('Products').get()
 
   let columns = []
-  productsCollection.forEach(doc => {
+  await productsCollection.forEach(doc => {
     columns.push({
       thumbnailImageUrl: doc.data().picture,
       title: doc.data().title,
