@@ -1,10 +1,6 @@
-const debugHandler = (event) => {
-  let msg = {
+module.exports = debugHandler = event => {
+  return msg = {
     type: 'text',
-    text: "Your order status >>> " + orderStatus
+    text: "Your order status >>> " + resolveOrderStatus(event)
   }
-  
-  return msg
 }
-
-module.exports = debugHandler

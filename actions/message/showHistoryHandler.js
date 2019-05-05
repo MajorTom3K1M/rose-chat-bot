@@ -1,7 +1,7 @@
 const DB = require('../../config/firebase.config')
 
-const showHistoryHandler = async (event) => {
-  const orderSnapshot = await DB.collection('Orders');
+module.exports = showHistoryHandler = async event => {
+  const orderSnapshot = await DB.collection('Orders')
   let history = orderSnapshot.get()
                   .then(querySnapshot => {
                     querySnapshot.docs
@@ -15,13 +15,9 @@ const showHistoryHandler = async (event) => {
                                           historyText += history.id + "\n"
                                         })
               )
-    
-  let msg = {
+
+  return msg = {
     type: 'text',
     text: historyText
-  };
-
-  return msg
+  }
 }
-
-module.exports = showHistoryHandler

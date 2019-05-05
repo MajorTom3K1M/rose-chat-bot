@@ -1,7 +1,7 @@
 const DB = require('../../config/firebase.config')
 const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
 
-const resolveOrderHandler = async (event) => {
+module.exports = resolveOrderHandler = async event => {
   let order = resolveOrderSnapshot(event, 'shopping')
 
   let paymentText = "รายการสั่งซื้อ #" + order.id + "\n"
@@ -33,5 +33,3 @@ const resolveOrderHandler = async (event) => {
 
   return msg
 }
-
-module.exports = resolveOrderHandler

@@ -1,7 +1,7 @@
 const DB = require('../../config/firebase.config')
 const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
 
-const updateOrderHandler = async (event) => {
+module.exports = updateOrderHandler = async event => {
   let order = resolveOrderSnapshot(event)
 
   let columns = []
@@ -27,7 +27,7 @@ const updateOrderHandler = async (event) => {
     }
   )
 
-  let msg = {
+  return msg = {
       type: "template",
       altText: "Shopping List",
       template: {
@@ -35,7 +35,4 @@ const updateOrderHandler = async (event) => {
           columns: columns
       }
   }
-  return msg
 }
-
-module.exports = updateOrderHandler

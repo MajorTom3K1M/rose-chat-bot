@@ -6,6 +6,5 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://rose-bot-shop.firebaseio.com'
 })
-const DB = admin.firestore();
 
-module.exports = DB;
+module.exports = DB = admin.firestore();
