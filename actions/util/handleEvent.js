@@ -1,4 +1,4 @@
-const handleMessageEvent = require('../actions/message/messageEventHandler')
+const handleMessageEvent = require('../messageEventHandler')
 
 const handleEvent = (event) => {
   if (event.type === 'message' && event.message.type === 'text') {

@@ -1,9 +1,9 @@
-const includesSome = require('../util/includesSome')
+const includesSome = require('./includesSome')
 
-const cancelOrderHandler = require('../actions/message/cancelOrderHandler')
-const checkOrderHandler = require('../actions/message/checkOrderHandler')
-const resolveOrderHandler = require('../actions/message/resolveOrderHandler')
-const updateOrderHandler = require('../actions/message/updateOrderHandler')
+const cancelOrderHandler = require('../message/cancelOrderHandler')
+const checkOrderHandler = require('../message/checkOrderHandler')
+const resolveOrderHandler = require('../message/resolveOrderHandler')
+const updateOrderHandler = require('../message/updateOrderHandler')
 
 function handleShoppingState(event) {
   let msg = {

@@ -1,4 +1,4 @@
-const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
+const resolveOrderSnapshot = require('../util/resolveOrderSnapshot')
 
 module.exports = paymentHandler = async event => {
   resolveOrderSnapshot(event, 'paying')

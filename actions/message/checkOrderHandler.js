@@ -1,5 +1,5 @@
-const resolveOrderSnapshot = require('../../util/resolveOrderSnapshot')
-const getProductFromOrder = require('../../util/getProductFromOrder')
+const resolveOrderSnapshot = require('../util/resolveOrderSnapshot')
+const getProductFromOrder = require('../util/getProductFromOrder')
 
 module.export = checkOrderHandler = event => {
   let orderPromise = resolveOrderSnapshot(event, 'shopping')
