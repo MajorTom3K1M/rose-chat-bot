@@ -15,7 +15,7 @@ module.exports = createOrderHandler = async event => {
           text: doc.data().title
         }
       },
-      body: {
+      hero: {
         type: 'image',
         url: doc.data().picture,
         size: 'full',
