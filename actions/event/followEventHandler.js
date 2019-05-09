@@ -1,5 +1,5 @@
 const line = require('@line/bot-sdk');
-const configLine = require('../config/line.config')
+const configLine = require('../../config/line.config')
 const client = new line.Client(configLine);
 
 module.exports = followEventHandler = event => {

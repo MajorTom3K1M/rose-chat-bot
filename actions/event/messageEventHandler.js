@@ -1,16 +1,16 @@
 const line = require('@line/bot-sdk');
-const configLine = require('../config/line.config')
+const configLine = require('../../config/line.config')
 const client = new line.Client(configLine);
 
-const resolveOrderStatus = require('./util/resolveOrderStatus')
-const handleShoppingState = require('./util/handleShoppingState')
-const handleDefaultState = require('./util/handleDefaultState')
-const includesSome = require('./util/includesSome')
+const resolveOrderStatus = require('../util/resolveOrderStatus')
+const handleShoppingState = require('../util/handleShoppingState')
+const handleDefaultState = require('../util/handleDefaultState')
+const includesSome = require('../util/includesSome')
 
-const debugHandler = require('./debug/debugHandler')
-const rudeWordHanlder = require('./message/rudeWordHandler')
-const paymentHandler = require('./image/paymentHandler')
-const shippingHandler = require('./location/shippingHandler')
+const debugHandler = require('../debug/debugHandler')
+const rudeWordHanlder = require('../message/rudeWordHandler')
+const paymentHandler = require('../image/paymentHandler')
+const shippingHandler = require('../location/shippingHandler')
 
 module.exports = handleMessageEvent = event => {
     let orderStatus = resolveOrderStatus(event)
@@ -49,7 +49,7 @@ module.exports = handleMessageEvent = event => {
 
     return Promise.resolve(msg)
         .then(result => {
-            console.log("messageEventHandler " + result)
+            console.log(result)
             client.replyMessage(event.replyToken, result);
         })
 }

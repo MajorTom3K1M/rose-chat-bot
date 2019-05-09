@@ -1,6 +1,6 @@
-const handleMessageEvent = require('../messageEventHandler')
-const followEventHandler = require('../followEventHandler')
-const unfollowEventHandler = require('../unfollowEventHandler')
+const handleMessageEvent = require('./event/messageEventHandler')
+const followEventHandler = require('./event/followEventHandler')
+const unfollowEventHandler = require('./event/unfollowEventHandler')
 
 const handleEvent = event => {
 
