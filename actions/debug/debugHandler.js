@@ -1,5 +1,3 @@
-const resolveOrderStatus = require('../util/resolveOrderStatus')
-
 module.exports = debugHandler = event => {
   contents = [{
     type: 'bubble',
