@@ -13,7 +13,7 @@ module.exports = createOrderHandler = async event => {
         contents: [
           {
             type: 'text',
-            text: 'doc.data().title'
+            text: doc.data().title
           }
         ]
       },
@@ -21,7 +21,7 @@ module.exports = createOrderHandler = async event => {
         type: 'image',
         url: doc.data().picture,
         size: 'full',
-        aspectRatio: '2:1'
+        aspectMode: 'cover'
       },
       body: {
         type: 'box',
@@ -48,8 +48,7 @@ module.exports = createOrderHandler = async event => {
             action: {
               type: 'postback',
               label: 'ใส่ตะกร้า',
-              data: 'action=createorder&items=' + doc.id + '&clientId=' + event.source.userId,
-              text: 'ใส่ตะกร้า'
+              data: 'action=createorder&items=' + doc.id + '&clientId=' + event.source.userId
             }
           }
         ]
@@ -58,13 +57,7 @@ module.exports = createOrderHandler = async event => {
   })
 
   return msg = {
-    type: 'text',
-    text: '55555'
-  }
-  /*
-  return msg = {
     type: 'carousel',
     contents: contentList
   }
-  */
 }
