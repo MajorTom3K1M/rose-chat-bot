@@ -7,9 +7,13 @@ const handleEvent = event => {
 
   switch(event.type) {
     case 'message': handleMessageEvent(event)
+      break
     case 'follow': followEventHandler(event)
+      break
     case 'join': followEventHandler(event)
+      break
     case 'postback': followEventHandler(event)
+      break
     default: return Promise.resolve(null);
   }
 }
