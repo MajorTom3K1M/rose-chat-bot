@@ -3,7 +3,10 @@ const DB = require('../../config/firebase.config')
 module.exports = createOrderHandler = async event => {
   let productsCollection = await DB.collection('Products').get()
 
-  let contents = []
+  console.log(productsCollection)
+
+  let contentList = []
+
   productsCollection.forEach(doc => {
     let column = {
       thumbnailImageUrl: doc.data().picture,
@@ -22,15 +25,17 @@ module.exports = createOrderHandler = async event => {
         }
       ]
     }
-    contents.push(column)
+    contentList.push(column)
   })
 
+  console.log(contentList)
+
   return msg = {
-    type: "template",
+    type: 'template',
     altText: "Shopping List",
     template: {
       type: "carousel",
-      contents: contents
+      contents: contentList
     }
   }
 }
