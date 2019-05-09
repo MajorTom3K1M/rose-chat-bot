@@ -5,56 +5,25 @@ module.exports = createOrderHandler = async event => {
 
   let contents = []
   productsCollection.forEach(doc => {
-    contents.push({
-      type: 'bubble',
-      header: {
-        type: 'box',
-        layout: 'vertical',
-        contents: [
-          {
-            type: 'text',
-            text: 'doc.data().title'
-          }
-        ]
-      },
-      hero: {
-        type: 'image',
-        url: doc.data().picture,
-        size: 'full',
-        aspectRatio: '2:1'
-      },
-      body: {
-        type: 'box',
-        layout: 'vertical',
-        contents: [
-          {
-            type: 'text',
-            text: 'ราคา ' + doc.data().price + ' บาท'
-          },
-          {
-            type: 'text',
-            text: 'ยอดคงเหลือ ' + doc.data().quantity + ' ชิ้น'
-          }
-        ]
-      },
-      footer: {
-        type: 'box',
-        layout: 'vertical',
-        spacing: 'md',
-        contents: [
-          {
-            type: 'button',
-            style: 'primary',
-            action: {
-              type: 'postback',
-              label: 'ใส่ตะกร้า',
-              data: 'action=createOrder&itemid=' + doc.id + '&clientId=' + event.source.userId,
-              text: 'ใส่ตะกร้า'
-            }
-          }
-        ]
-      }     
-    })
+    let column = {
+      thumbnailImageUrl: doc.data().picture,
+      title: doc.data().title,
+      text: "$" + doc.data().price + " (คงเหลือ " + doc.data().quantity + " ชิ้น)",
+      actions: [
+        {
+          type: "postback",
+          label: "Add to cart",
+          data: "action=updateorder&itemid=" + doc.id + "&orderId=" + order.then(result => result.id)
+        },
+        {
+          type: "uri",
+          label: "View detail",
+          uri: "https://blackpinkmerch.com/"
+        }
+      ]
+    }
+    columns.push(column)
+    
   })
 
   return msg = {
