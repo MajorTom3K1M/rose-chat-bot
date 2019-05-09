@@ -19,16 +19,16 @@ module.exports = createOrderHandler = async event => {
         type: 'image',
         url: doc.data().picture,
         size: 'full',
-        aspectRatio: '2:1'
+        aspectMode: 'cover'
       },
-      footer: {
+      body: {
         type: 'box',
         layout: 'vertical',
         contents: {
           type: 'text',
           text: "$" + doc.data().price + " (คงเหลือ " + doc.data().quantity + " ชิ้น)"
         }
-      },      
+      }      
     })
   })
 
