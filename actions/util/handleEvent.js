@@ -9,9 +9,7 @@ const handleEvent = event => {
   switch(event.type) {
     case 'message': return handleMessageEvent(event)
     case 'follow': return followEventHandler(event)
-    case 'unfollow': return unfollowEventHandler(event)
-    case 'memberJoined': return unfollowEventHandler(event)
-    case 'leave': return unfollowEventHandler(event)
+    case 'join': return unfollowEventHandler(event)
     case 'postback': return unfollowEventHandler(event)
     default: return Promise.resolve(null);
   }
