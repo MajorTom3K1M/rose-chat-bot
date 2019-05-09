@@ -14,6 +14,7 @@ const shippingHandler = require('./location/shippingHandler')
 
 module.exports = handleMessageEvent = event => {
     let orderStatus = resolveOrderStatus(event)
+    let eventText = event.message.text.toLowerCase()
 
     let msg = {
         type: 'text',
