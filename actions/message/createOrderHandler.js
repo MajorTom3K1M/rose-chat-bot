@@ -23,7 +23,6 @@ module.exports = createOrderHandler = async event => {
       ]
     }
     contents.push(column)
-    
   })
 
   return msg = {
