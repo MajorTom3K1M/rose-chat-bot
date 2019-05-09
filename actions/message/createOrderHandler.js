@@ -13,7 +13,9 @@ module.exports = createOrderHandler = async event => {
         contents: [
           {
             type: 'text',
-            text: doc.data().title
+            text: doc.data().title,
+            wrap: true,
+            weight: 'bold'
           }
         ]
       },
@@ -25,15 +27,19 @@ module.exports = createOrderHandler = async event => {
       },
       body: {
         type: 'box',
-        layout: 'vertical',
+        layout: 'horizontal',
         contents: [
           {
             type: 'text',
-            text: 'ราคา ' + doc.data().price + ' บาท'
+            text: '$' + doc.data().price,
+            size: 'lg'
+          },
+          {
+            type: 'separator'
           },
           {
             type: 'text',
-            text: 'ยอดคงเหลือ ' + doc.data().quantity + ' ชิ้น'
+            text: 'ยอดคงเหลือ\n' + doc.data().quantity + ' ชิ้น'
           }
         ]
       },
