@@ -58,7 +58,13 @@ module.exports = createOrderHandler = async event => {
   })
 
   return msg = {
+    type: 'text',
+    text: '55555'
+  }
+  /*
+  return msg = {
     type: 'carousel',
     contents: contentList
   }
+  */
 }
