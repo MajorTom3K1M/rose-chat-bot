@@ -19,10 +19,10 @@ module.exports = postbackEventHandler = event => {
 
   switch(params.action) {
     case 'createorder':
-      createOrder(params.clientId, params.items)
+      await createOrder(params.clientId, params.items)
       break
     case 'updateorder':
-      updateOrder(params.clientId, params.items)
+      await updateOrder(params.clientId, params.items)
       break
   }
 

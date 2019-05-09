@@ -1,7 +1,7 @@
 const DB = require('../../config/firebase.config')
 
-module.exports = createOrder = (clientId, items) => {
-  DB.collection('Orders').add({
+module.exports = createOrder = async (clientId, items) => {
+  await DB.collection('Orders').add({
     clientId: clientId,
     items: items,
     status: "shopping"
