@@ -6,28 +6,14 @@ const handleEvent = event => {
 
   console.log(event)
 
-  if (event.type === 'message') {
-    handleMessageEvent(event);
-  }
-  /*
-  else if (event.type === 'memberJoined') {
-
-  }
-  else if (event.type === 'leave') {
-
-  }
-  else if (event.type === 'postback') {
-    
-  }
-  */
-  else if (event.type === 'follow') {
-    followEventHandler(event);
-  }
-  else if (event.type === 'unfollow') {
-    unfollowEventHandler(event);
-  }
-  else {
-    return Promise.resolve(null);
+  switch(event.type) {
+    case 'message': return handleMessageEvent(event)
+    case 'follow': return followEventHandler(event)
+    case 'unfollow': return unfollowEventHandler(event)
+    case 'memberJoined': return unfollowEventHandler(event)
+    case 'leave': return unfollowEventHandler(event)
+    case 'postback': return unfollowEventHandler(event)
+    default: return Promise.resolve(null);
   }
 }
 
