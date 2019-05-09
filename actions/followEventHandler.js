@@ -5,12 +5,8 @@ const client = new line.Client(configLine);
 module.exports = followEventHandler = event => {
     let msg = {
         type: 'text',
-        text: 'ขอบคุณที่ติดตามหนูนะคะ'
+        text: 'ขอบคุณที่กลับมาติดตามหนูนะคะ >///<'
     }
 
-    return Promise.resolve(msg)
-        .then(result => {
-            console.log("follow" + result)
-            client.replyMessage(event.replyToken, result)
-        })
+    return client.replyMessage(event.replyToken, msg)
 }

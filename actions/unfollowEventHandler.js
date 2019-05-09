@@ -5,7 +5,7 @@ const client = new line.Client(configLine);
 module.exports = unfollowEventHandler = event => {
     let msg = {
         type: 'text',
-        text: 'ไม่นะ จะไม่ติดตามหนูแล้วจริงๆ หรอ TT'
+        text: 'จะไม่ติดตามหนูแล้วจริงๆ หรอ T^T'
     }
 
     return client.replyMessage(event.replyToken, msg)
