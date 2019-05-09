@@ -8,9 +8,5 @@ module.exports = unfollowEventHandler = event => {
         text: 'ไม่นะ จะไม่ติดตามหนูแล้วจริงๆ หรอ TT'
     }
 
-    return Promise.resolve(msg)
-        .then(result => {
-            console.log("unfollowEventHandler " + result)
-            client.replyMessage(event.replyToken, result)
-        })
+    return client.replyMessage(event.replyToken, msg)
 }
