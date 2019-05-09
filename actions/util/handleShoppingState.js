@@ -5,7 +5,7 @@ const checkOrderHandler = require('../message/checkOrderHandler')
 const resolveOrderHandler = require('../message/resolveOrderHandler')
 const updateOrderHandler = require('../message/updateOrderHandler')
 
-function handleShoppingState(event) {
+module.exports = handleShoppingState = event => {
   let msg = {
     type: 'text',
     text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
@@ -28,4 +28,3 @@ function handleShoppingState(event) {
   return msg
 }
 
-module.exports = handleShoppingState

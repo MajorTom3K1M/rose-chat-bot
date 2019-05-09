@@ -1,7 +1,7 @@
 const handleMessageEvent = require('./event/messageEventHandler')
 const followEventHandler = require('./event/followEventHandler')
 
-const handleEvent = event => {
+module.exports = handleEvent = event => {
 
   console.log(event)
 
@@ -18,4 +18,3 @@ const handleEvent = event => {
   }
 }
 
-module.exports = handleEvent
