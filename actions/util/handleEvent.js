@@ -2,7 +2,10 @@ const handleMessageEvent = require('../messageEventHandler')
 const followEventHandler = require('../followEventHandler')
 const unfollowEventHandler = require('../unfollowEventHandler')
 
-const handleEvent = (event) => {
+const handleEvent = event => {
+
+  console.log(event)
+
   if (event.type === 'message') {
     handleMessageEvent(event);
   }
@@ -14,7 +17,7 @@ const handleEvent = (event) => {
 
   }
   else if (event.type === 'postback') {
-
+    
   }
   */
   else if (event.type === 'follow') {
