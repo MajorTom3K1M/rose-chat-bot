@@ -12,7 +12,7 @@ const rudeWordHandler = require('../message/rudeWordHandler')
 const paymentHandler = require('../image/paymentHandler')
 const shippingHandler = require('../location/shippingHandler')
 
-module.exports = handleMessageEvent = event => {
+module.exports = handleMessageEvent = async event => {
     let eventText = event.message.text.toLowerCase()
 
     let msg = {
