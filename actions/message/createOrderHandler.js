@@ -48,7 +48,7 @@ module.exports = createOrderHandler = async event => {
             action: {
               type: 'postback',
               label: 'ใส่ตะกร้า',
-              data: 'action=createorder&itemid=' + doc.id + '&clientId=' + event.source.userId,
+              data: 'action=createorder&itemId=' + doc.id + '&clientid=' + event.source.userId,
               text: 'ใส่ตะกร้า'
             }
           }
