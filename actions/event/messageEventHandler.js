@@ -40,7 +40,6 @@ module.exports = handleMessageEvent = event => {
                 break
             default:
                 msg = handleDefaultState(event)
-                console.log("msg " + msg)
                 break
         }
     }

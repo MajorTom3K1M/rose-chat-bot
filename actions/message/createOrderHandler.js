@@ -62,7 +62,7 @@ module.exports = createOrderHandler = async event => {
     altText: 'Shopping List',
     template: {
       type: 'carousel',
-      contents: contentList
+      columns: contentList
     }
   }
 }
