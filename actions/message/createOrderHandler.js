@@ -21,7 +21,7 @@ module.exports = createOrderHandler = async event => {
         type: 'image',
         url: doc.data().picture,
         size: 'full',
-        aspectMode: 'cover'
+        aspectRatio: '2:1'
       },
       body: {
         type: 'box',
@@ -40,6 +40,7 @@ module.exports = createOrderHandler = async event => {
       footer: {
         type: 'box',
         layout: 'vertical',
+        spacing: 'md',
         contents: [
           {
             type: 'button',
@@ -47,7 +48,8 @@ module.exports = createOrderHandler = async event => {
             action: {
               type: 'postback',
               label: 'ใส่ตะกร้า',
-              data: 'action=createOrder&itemid=' + doc.id + '&clientId=' + event.source.userId
+              data: 'action=createOrder&itemid=' + doc.id + '&clientId=' + event.source.userId,
+              text: 'ใส่ตะกร้า'
             }
           }
         ]
