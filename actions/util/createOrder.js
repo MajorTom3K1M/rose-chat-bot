@@ -3,7 +3,12 @@ const DB = require('../../config/firebase.config')
 module.exports = createOrder = async (clientId, items) => {
   await DB.collection('Orders').add({
     clientId: clientId,
-    items: {items},
+    items: [
+      {
+        itemId: items,
+        qty: 1
+      }
+    ],
     status: "shopping"
   }).then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
