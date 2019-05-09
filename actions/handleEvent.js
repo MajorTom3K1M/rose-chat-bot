@@ -1,5 +1,6 @@
 const handleMessageEvent = require('./event/messageEventHandler')
 const followEventHandler = require('./event/followEventHandler')
+const postbackEventHandler = require('./event/postbackEventHandler')
 
 module.exports = handleEvent = event => {
 
@@ -12,7 +13,7 @@ module.exports = handleEvent = event => {
       break
     case 'join': followEventHandler(event)
       break
-    case 'postback': followEventHandler(event)
+    case 'postback': postbackEventHandler(event)
       break
     default: return Promise.resolve(null);
   }

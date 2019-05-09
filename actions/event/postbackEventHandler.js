@@ -1,3 +1,7 @@
+const line = require('@line/bot-sdk');
+const configLine = require('../../config/line.config')
+const client = new line.Client(configLine);
+
 const url = require('url');  
 const querystring = require('querystring');
 
@@ -8,6 +12,11 @@ module.exports = postbackEventHandler = event => {
   let parsedUrl = url.parse(event.postback.data);  
   let params = querystring.parse(parsedUrl.query);
 
+  let msg = {
+    type: 'text',
+    text: 'พี่กดปุ่มอะไรนะคะ หนูไม่เข้าใจค่ะ'
+  }
+
   switch(params.action) {
     case 'createorder':
       createOrder(params.clientId, params.items)
@@ -16,4 +25,7 @@ module.exports = postbackEventHandler = event => {
       updateOrder(params.clientId, params.items)
       break
   }
+
+  return Promise.resolve(msg)
+                .then(result => { client.replyMessage(event.replyToken, result) })
 }
