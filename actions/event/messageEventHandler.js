@@ -44,9 +44,13 @@ module.exports = handleMessageEvent = event => {
         }
     }
 
+    return client.replyMessage(event.replyToken, msg)
+
+    /*
     return Promise.resolve(msg)
         .then(result => {
             console.log(result)
-            client.replyMessage(event.replyToken, result);
+            client.replyMessage(event.replyToken, result)
         })
+        */
 }
