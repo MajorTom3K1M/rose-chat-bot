@@ -1,4 +1,4 @@
-const DB = require('../config/firebase.config')
+const DB = require('../../config/firebase.config')
 
 module.exports = async function getProductFromOrder(item, orderText) {
   let orderText = "รายการสั่งซื้อ #" + order.id + "\n"

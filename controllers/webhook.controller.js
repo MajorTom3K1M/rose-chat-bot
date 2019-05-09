@@ -1,4 +1,4 @@
-const handleEvent = require('../util/handleEvent')
+const handleEvent = require('../actions/util/handleEvent')
 
 module.exports = WebHook = (req, res) => {
     Promise

@@ -1,13 +1,15 @@
 const line = require('@line/bot-sdk');
-const configLine = require('../../config/line.config')
+const configLine = require('../config/line.config')
 const client = new line.Client(configLine);
 
-const resolveOrderStatus = require('../../util/resolveOrderStatus')
-const handleShoppingState = require('../../util/handleShoppingState')
-const handleDefaultState = require('../../util/handleDefaultState')
+const resolveOrderStatus = require('./util/resolveOrderStatus')
+const handleShoppingState = require('./util/handleShoppingState')
+const handleDefaultState = require('./util/handleDefaultState')
 
-const paymentHandler = require('../image/paymentHandler')
-const shippingHandler = require('../location/shippingHandler')
+const debugHandler = require('./debug/debugHandler')
+const rudeWordHanlder = require('./message/rudeWordHandler')
+const paymentHandler = require('./image/paymentHandler')
+const shippingHandler = require('./location/shippingHandler')
 
 module.exports = handleMessageEvent = event => {
     let orderStatus = resolveOrderStatus(event)
@@ -15,6 +17,13 @@ module.exports = handleMessageEvent = event => {
     let msg = {
         type: 'text',
         text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
+    }
+
+    if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
+        return rudeWordHanlder(event)
+    } 
+    else if (includesSome(eventText, ['debug'])) {
+        return debugHandler(event)
     }
 
     switch(orderStatus) {
