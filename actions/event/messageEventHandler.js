@@ -40,17 +40,14 @@ module.exports = handleMessageEvent = event => {
                 break
             default:
                 msg = handleDefaultState(event)
+                console.log("msg " + msg)
                 break
         }
     }
 
-    return client.replyMessage(event.replyToken, msg)
-
-    /*
     return Promise.resolve(msg)
         .then(result => {
             console.log(result)
             client.replyMessage(event.replyToken, result)
         })
-        */
 }
