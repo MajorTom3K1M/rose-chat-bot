@@ -30,14 +30,10 @@ module.exports = handleMessageEvent = event => {
 
     switch(orderStatus) {
         case "paying":
-            if (event.message.type === "sticker") {
-                msg = paymentHandler(event)
-            }
+            if (event.message.type === "sticker") msg = paymentHandler(event)
             break;
         case "shipping":
-            if (event.message.type === "location") {
-                msg = shippingHandler(event)
-            }
+            if (event.message.type === "location") msg = shippingHandler(event)
             break;
         case "shopping":
             msg = handleShoppingState(event)

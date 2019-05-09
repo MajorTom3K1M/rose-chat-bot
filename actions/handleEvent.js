@@ -6,10 +6,10 @@ const handleEvent = event => {
   console.log(event)
 
   switch(event.type) {
-    case 'message': return handleMessageEvent(event)
-    case 'follow': return followEventHandler(event)
-    case 'join': return followEventHandler(event)
-    case 'postback': return followEventHandler(event)
+    case 'message': handleMessageEvent(event)
+    case 'follow': followEventHandler(event)
+    case 'join': followEventHandler(event)
+    case 'postback': followEventHandler(event)
     default: return Promise.resolve(null);
   }
 }
