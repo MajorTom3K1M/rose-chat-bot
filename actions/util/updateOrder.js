@@ -1,6 +1,6 @@
 const DB = require('../../config/firebase.config')
 
-module.exports = updateOrder = (clientId, itemId) => {
+module.exports = updateOrder = async (clientId, itemId) => {
   let order = await DB.collection('Orders')
                       .where("clientId","==",clientId)
                       .where("status","==","shopping")
