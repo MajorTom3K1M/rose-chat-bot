@@ -9,7 +9,7 @@ module.exports = resolveOrderStatus = async event => {
 
   let status = "None"
 
-  order.then(doc => {
+  order.forEach(doc => {
     if (!doc.exists) {
       console.log('No such document!')
     } 
