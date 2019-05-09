@@ -8,7 +8,7 @@ const querystring = require('querystring');
 const createOrder = require('../util/createOrder')
 const updateOrder = require('../util/updateOrder')
 
-module.exports = postbackEventHandler = event => {
+module.exports = postbackEventHandler = async event => {
   let parsedUrl = url.parse(event.postback.data);  
   let params = querystring.parse(parsedUrl.query);
 
