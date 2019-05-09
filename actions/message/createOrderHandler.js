@@ -13,7 +13,7 @@ module.exports = createOrderHandler = async event => {
         contents: [
           {
             type: 'text',
-            text: doc.data().title
+            text: 'doc.data().title'
           }
         ]
       },
