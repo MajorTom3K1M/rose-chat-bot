@@ -1,4 +1,4 @@
-const resolveOrderSnapshot = require('../util/resolveOrderSnapshot')
+const resolveOrderSnapshot = require('../util/resolveOrderByStatus')
 
 module.exports = shippingHandler = event => {
   resolveOrderSnapshot(event, 'shipping')
