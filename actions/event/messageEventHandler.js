@@ -13,7 +13,6 @@ const paymentHandler = require('../image/paymentHandler')
 const shippingHandler = require('../location/shippingHandler')
 
 module.exports = handleMessageEvent = event => {
-    let orderStatus = resolveOrderStatus(event)
     let eventText = event.message.text.toLowerCase()
 
     let msg = {
@@ -28,14 +27,15 @@ module.exports = handleMessageEvent = event => {
         msg = debugHandler(event)
     }
     else {
+        let orderStatus = resolveOrderStatus(event)
         switch(orderStatus) {
-            case "paying":
+            case 'paying':
                 if (event.message.type === "sticker") msg = paymentHandler(event)
                 break
-            case "shipping":
-                if (event.message.type === "location") msg = shippingHandler(event)
+            case 'shipping':
+                if (event.message.type === 'location') msg = shippingHandler(event)
                 break
-            case "shopping":
+            case 'shopping':
                 msg = handleShoppingState(event)
                 break
             default:
@@ -46,6 +46,7 @@ module.exports = handleMessageEvent = event => {
 
     return Promise.resolve(msg)
         .then(result => {
+            console.log("res " + result)
             console.log(result)
             client.replyMessage(event.replyToken, result)
         })
