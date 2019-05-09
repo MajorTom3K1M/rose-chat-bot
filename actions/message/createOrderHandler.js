@@ -57,8 +57,6 @@ module.exports = createOrderHandler = async event => {
     })
   })
 
-  contents.map(function(x) { console.log(x) })
-
   return msg = {
     type: "template",
     altText: "Shopping List",
