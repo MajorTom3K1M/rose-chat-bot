@@ -5,6 +5,7 @@ const client = new line.Client(configLine);
 const resolveOrderStatus = require('./util/resolveOrderStatus')
 const handleShoppingState = require('./util/handleShoppingState')
 const handleDefaultState = require('./util/handleDefaultState')
+const includesSome = require('./util/includesSome')
 
 const debugHandler = require('./debug/debugHandler')
 const rudeWordHanlder = require('./message/rudeWordHandler')
