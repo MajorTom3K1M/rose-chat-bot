@@ -1,4 +1,4 @@
 module.exports = configLine = {
-    channelAccessToken: (process.env.channelAccessToken || "JtnZ4tiXAhiJ0jI6Qc1zgWO50aoV/9ui1Kpekakk/i5xmRbgW4yFPexy3PEv7Gm8aYEXrotpYAuTWQQfuQ9bJxo96pQPIt3T2zMZbvAu/hWnZB4Oqox8tMW8Az3xAjKGR1j6XClorkwPLto82cN+TQdB04t89/1O/w1cDnyilFU="),
-    channelSecret: (process.env.channelSecret || "7e11260ef38889493c9bc7d212aa9866")
+    channelAccessToken: (process.env.channelAccessToken || "I9gLIM4epELXEkuWX7rCcvEvO2xhl9Ve9csSWPDUv9mfSv1h6tRx6Bp0zC6BYUBrRT/RxYhTsF64FNbNf3hdpjjPFrxHP/ia3EIuTnBxbrOMWfxeqr6tUaHUuMbYZCJdabdUWzHPKTr8Ofc8t/XQdAdB04t89/1O/w1cDnyilFU="),
+    channelSecret: (process.env.channelSecret || "c627a11f0a43dea2f10b83bf0f0682e1")
 }

@@ -4,7 +4,7 @@ module.exports = createOrderHandler = async event => {
   let productsCollection = await DB.collection('Products').get()
 
   let contentList = []
-  
+
   productsCollection.forEach(doc => {
     contentList.push({
       type: 'bubble',
@@ -59,7 +59,7 @@ module.exports = createOrderHandler = async event => {
   })
 
   return msg = {
-    type: 'carousel',
-    contents: contentList
+    type: 'text',
+    contents: 'List Product'
   }
 }
