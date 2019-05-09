@@ -7,10 +7,10 @@ const handleDefaultState = event => {
   let eventText = event.message.text.toLowerCase()
 
   if (includesSome(eventText, ['buy', 'ซื้อ', 'รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
-    return createOrderHandler(event)
+    return msg = createOrderHandler(event)
   }
   else if (includesSome(eventText, ["เช็ค", 'ประวัติการสั่งซื้อ', 'history'])) {
-    return showHistoryHandler(event)
+    return msg = showHistoryHandler(event)
   }
 
   return msg = {

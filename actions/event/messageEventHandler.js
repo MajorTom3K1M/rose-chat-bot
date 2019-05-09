@@ -22,25 +22,26 @@ module.exports = handleMessageEvent = event => {
     }
 
     if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
-        return rudeWordHandler(event)
+        msg = rudeWordHandler(event)
     } 
     else if (includesSome(eventText, ['debug'])) {
-        return debugHandler(event)
+        msg = debugHandler(event)
     }
-
-    switch(orderStatus) {
-        case "paying":
-            if (event.message.type === "sticker") msg = paymentHandler(event)
-            break;
-        case "shipping":
-            if (event.message.type === "location") msg = shippingHandler(event)
-            break;
-        case "shopping":
-            msg = handleShoppingState(event)
-            break;
-        default:
-            msg = handleDefaultState(event)
-            break;
+    else {
+        switch(orderStatus) {
+            case "paying":
+                if (event.message.type === "sticker") msg = paymentHandler(event)
+                break
+            case "shipping":
+                if (event.message.type === "location") msg = shippingHandler(event)
+                break
+            case "shopping":
+                msg = handleShoppingState(event)
+                break
+            default:
+                msg = handleDefaultState(event)
+                break
+        }
     }
 
     return Promise.resolve(msg)
