@@ -22,7 +22,7 @@ module.exports = createOrderHandler = async event => {
         }
       ]
     }
-    columns.push(column)
+    contents.push(column)
     
   })
 
