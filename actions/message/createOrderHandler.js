@@ -3,39 +3,62 @@ const DB = require('../../config/firebase.config')
 module.exports = createOrderHandler = async event => {
   let productsCollection = await DB.collection('Products').get()
 
-  console.log(productsCollection)
-
   let contentList = []
-
   productsCollection.forEach(doc => {
-    let column = {
-      thumbnailImageUrl: doc.data().picture,
-      title: doc.data().title,
-      text: "$" + doc.data().price + " (คงเหลือ " + doc.data().quantity + " ชิ้น)",
-      actions: [
-        {
-          type: "postback",
-          label: "Add to cart",
-          data: "action=createOrder&itemid=" + doc.id + "&clientId=" + event.source.userId
-        },
-        {
-          type: "uri",
-          label: "View detail",
-          uri: "https://blackpinkmerch.com/"
-        }
-      ]
-    }
-    contentList.push(column)
+    contentList.push({
+      type: 'bubble',
+      header: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'text',
+            text: 'doc.data().title'
+          }
+        ]
+      },
+      hero: {
+        type: 'image',
+        url: doc.data().picture,
+        size: 'full',
+        aspectRatio: '2:1'
+      },
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'text',
+            text: 'ราคา ' + doc.data().price + ' บาท'
+          },
+          {
+            type: 'text',
+            text: 'ยอดคงเหลือ ' + doc.data().quantity + ' ชิ้น'
+          }
+        ]
+      },
+      footer: {
+        type: 'box',
+        layout: 'vertical',
+        spacing: 'md',
+        contents: [
+          {
+            type: 'button',
+            style: 'primary',
+            action: {
+              type: 'postback',
+              label: 'ใส่ตะกร้า',
+              data: 'action=createorder&items=' + doc.id + '&clientId=' + event.source.userId,
+              text: 'ใส่ตะกร้า'
+            }
+          }
+        ]
+      }     
+    })
   })
 
-  console.log(contentList)
-
   return msg = {
-    type: 'template',
-    altText: "Shopping List",
-    template: {
-      type: "carousel",
-      contents: contentList
-    }
+    type: 'carousel',
+    contents: contentList
   }
 }

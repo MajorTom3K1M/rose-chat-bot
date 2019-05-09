@@ -9,7 +9,7 @@ const handleDefaultState = event => {
   if (includesSome(eventText, ['buy', 'ซื้อ', 'รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
     return msg = createOrderHandler(event)
   }
-  else if (includesSome(eventText, ["เช็ค", 'ประวัติการสั่งซื้อ', 'history'])) {
+  else if (includesSome(eventText, ['examine', 'check', 'เช็ค', 'ประวัติการสั่งซื้อ', 'history'])) {
     return msg = showHistoryHandler(event)
   }
 

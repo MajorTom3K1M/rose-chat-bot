@@ -12,7 +12,7 @@ router.post('/product',createProduct);
 router.put('/product/:id',updateProduct);
 router.delete('/product/:id',deleteProduct);
 
-router.post('/updateorder/:orderId/:itemId', updateOrder);
-router.post('/createorder/:clientId/:itemId', createOrder);
+router.post('/updateOrder/:orderId/:itemId', updateOrder);
+router.post('/createOrder/:clientId/:items', createOrder);
 
 module.exports = router;
