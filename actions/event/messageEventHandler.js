@@ -8,7 +8,7 @@ const handleDefaultState = require('../util/handleDefaultState')
 const includesSome = require('../util/includesSome')
 
 const debugHandler = require('../debug/debugHandler')
-const rudeWordHanlder = require('../message/rudeWordHandler')
+const rudeWordHandler = require('../message/rudeWordHandler')
 const paymentHandler = require('../image/paymentHandler')
 const shippingHandler = require('../location/shippingHandler')
 
@@ -22,7 +22,7 @@ module.exports = handleMessageEvent = event => {
     }
 
     if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
-        return rudeWordHanlder(event)
+        return rudeWordHandler(event)
     } 
     else if (includesSome(eventText, ['debug'])) {
         return debugHandler(event)
