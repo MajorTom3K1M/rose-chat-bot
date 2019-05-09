@@ -45,9 +45,5 @@ module.exports = handleMessageEvent = async event => {
     }
 
     return Promise.resolve(msg)
-        .then(result => {
-            console.log("res " + result)
-            console.log(result)
-            client.replyMessage(event.replyToken, result)
-        })
+                  .then(result => { client.replyMessage(event.replyToken, result) })
 }
