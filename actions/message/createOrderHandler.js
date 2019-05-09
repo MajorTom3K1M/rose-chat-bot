@@ -4,6 +4,7 @@ module.exports = createOrderHandler = async event => {
   let productsCollection = await DB.collection('Products').get()
 
   let contentList = []
+  
   productsCollection.forEach(doc => {
     contentList.push({
       type: 'bubble',
