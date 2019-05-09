@@ -39,7 +39,7 @@ module.exports = createOrderHandler = async event => {
           },
           {
             type: 'text',
-            text: 'ยอดคงเหลือ\n' + doc.data().quantity + ' ชิ้น'
+            text: 'เหลือ' + doc.data().quantity + ' ชิ้น'
           }
         ]
       },
