@@ -5,7 +5,14 @@ module.exports = resolveOrderStatus = async event => {
                                 .where('clientId', '==', event.source.userId)
                                 .get()
   let userOrderDocs = userOrderCollection.docs
-  let userStatus = userOrderDocs.pop().get('status')
+  let userStatus = 'None'
+  while(userOrderDocs.length > 0) {
+    userStatus = userOrderDocs.pop().get('status')
+    if(userStatus != 'shopping' && userStatus != 'paying') {
+      userStatus = 'None'
+    }
+  }
+  
   console.log(userStatus)
-  return userStatus === undefined ? 'None' : userStatus
+  return userStatus
 }
