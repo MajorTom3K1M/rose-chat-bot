@@ -17,7 +17,7 @@ module.exports = checkOrderHandler = async event => {
   let totalPrice = 0
   let totalQuantity = 0
   let itemListContent = []
-  
+
   let orderItems = order.data().items
   orderItems.forEach(async item => {
     await DB.collection('Product')
@@ -47,50 +47,51 @@ module.exports = checkOrderHandler = async event => {
                 ]
               })
             })
-  })
-
-  itemListContent.push({
-    type: 'separator',
-    margin: 'xxl'
-  },
-  {
-    type: 'box',
-    layout: 'horizontal',
-    margin: 'xxl',
-    contents: [
-      {
-        type: 'text',
-        text: 'QUANTITY',
-        size: 'sm',
-        color: '#555555'
-      },
-      {
-        type: 'text',
-        text: '' + totalQuantity,
-        size: 'sm',
-        color: '#111111',
-        align: 'end'
-      }
-    ]
-  },
-  {
-    type: 'box',
-    layout: 'horizontal',
-    contents: [
-      {
-        type: 'text',
-        text: 'TOTAL PRICE',
-        size: 'sm',
-        color: '#555555'
-      },
-      {
-        type: 'text',
-        text: '$' + totalPrice,
-        size: 'sm',
-        color: '#111111',
-        align: 'end'
-      }
-    ]
+            .then(() => {
+              itemListContent.push({
+                type: 'separator',
+                margin: 'xxl'
+              },
+              {
+                type: 'box',
+                layout: 'horizontal',
+                margin: 'xxl',
+                contents: [
+                  {
+                    type: 'text',
+                    text: 'QUANTITY',
+                    size: 'sm',
+                    color: '#555555'
+                  },
+                  {
+                    type: 'text',
+                    text: '' + totalQuantity,
+                    size: 'sm',
+                    color: '#111111',
+                    align: 'end'
+                  }
+                ]
+              },
+              {
+                type: 'box',
+                layout: 'horizontal',
+                contents: [
+                  {
+                    type: 'text',
+                    text: 'TOTAL PRICE',
+                    size: 'sm',
+                    color: '#555555'
+                  },
+                  {
+                    type: 'text',
+                    text: '$' + totalPrice,
+                    size: 'sm',
+                    color: '#111111',
+                    align: 'end'
+                  }
+                ]
+              })
+            }) 
   })
 
   return msg = {
