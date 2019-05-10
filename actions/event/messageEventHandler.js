@@ -27,7 +27,8 @@ module.exports = handleMessageEvent = async event => {
        msg = debugHandler(event)
     }
     else {
-        let orderStatus = resolveOrderStatus(event)
+        let orderStatus = await resolveOrderStatus(event)
+        console.log(orderStatus)
         switch(orderStatus) {
             case 'paying':
                 if (event.message.type === "sticker")
