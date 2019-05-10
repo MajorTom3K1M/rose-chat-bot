@@ -13,16 +13,16 @@ module.exports = handleShoppingState = event => {
 
   let eventText = event.message.text.toLowerCase()
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
-    msg = updateOrderHandler(client, event)
+    msg = updateOrderHandler(event)
   }
   else if (includesSome(eventText, ['ตรวจสอบ', 'check cart', 'shopping cart', 'cart', 'cart list', 'list'])) {
-    msg = checkOrderHandler(client, event)
+    msg = checkOrderHandler(event)
   }
   else if (includesSome(eventText, ['ชำระเงิน', 'ยืนยันรายการ', 'pay now', 'payment', 'checkout', 'check out'])) {
-    msg = resolveOrderHandler(client, event)
+    msg = resolveOrderHandler(event)
   }
   else if (includesSome(eventText, ['ยกเลิก', 'cancel'])) {
-    msg = cancelOrderHandler(client, event)
+    msg = cancelOrderHandler(event)
   }
 
   return msg
