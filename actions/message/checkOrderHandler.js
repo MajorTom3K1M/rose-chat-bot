@@ -15,10 +15,10 @@ module.exports = checkOrderHandler = async event => {
   let productCollection = await DB.collection('Product')
                                   .get()
 
-  productCollection.docs.forEach(product => {
+  productCollection.forEach(product => {
     console.log(product)
-    productMap.set(product.id, product.data().price)
-    productNameMap.set(product.id, product.data().title)
+    productMap.set(product.id, product.get('price'))
+    productNameMap.set(product.id, product.get('title'))
   })
 
   let order = await DB.collection('Orders')
