@@ -1,11 +1,9 @@
 const DB = require('../../config/firebase.config')
 
 module.exports = createOrder = async (clientId, items) => {
-  let productCollection = await DB.collection('Products')
-                                  .where('itemId', '==', 'items')
-                                  .get()
-
-  let productQuantity = productCollection.docs.pop().get('quantity')
+  let productQuantity = await DB.collection('Products')
+                                  .doc(items)
+                                  .get('quantity')
   if(parseInt(productQuantity) > 0) {
     await DB.collection('Orders').add({
       clientId: clientId,

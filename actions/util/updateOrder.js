@@ -2,11 +2,9 @@ const DB = require('../../config/firebase.config')
 var admin = require('firebase-admin');
 
 module.exports = updateOrder = async (clientId, itemId) => {
-  let productCollection = await DB.collection('Products')
-                                  .where('itemId', '==', 'items')
-                                  .get()
-
-  let productQuantity = productCollection.docs.pop().get('quantity')
+  let productQuantity = await DB.collection('Products')
+                                  .doc(items)
+                                  .get('quantity')
 
   let userOrderCollection = await DB.collection('Orders')
                                 .where('clientId', '==', clientId)
