@@ -3,15 +3,16 @@ const configLine = require('../../config/line.config')
 const client = new line.Client(configLine);
 
 module.exports = joinEventHandler = event => {
-    let msg = {
-        type: 'text',
-        text: 'สวัสดีค่ะ หนูชื่อโรเซ่ ฝากตัวด้วยนะคะ'
-    }
-    client.replyMessage(event.replyToken, msg)
-    let stickerMsg = {
-        type: 'sticker',
-        packageId: '11538',
-        stickerId: '51626495'
-    }
-    return client.replyMessage(event.replyToken, stickerMsg)
+    let msg = [
+        {
+            type: 'text',
+            text: 'สวัสดีค่ะ หนูชื่อโรเซ่ ฝากตัวด้วยนะคะ'
+        },
+        {
+            type: 'sticker',
+            packageId: '11538',
+            stickerId: '51626495'
+        }
+    ]
+    return client.replyMessage(event.replyToken, msg)
 }
