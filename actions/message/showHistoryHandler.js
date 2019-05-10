@@ -9,18 +9,13 @@ module.exports = showHistoryHandler = async event => {
                                     .get()
   
   msg = []
-
   let histories = historyCollection.docs
   for(i = 0; i < histories.length; i++) {
     msg.push({
       type: 'text',
-      text: histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime')
+      text: "#" + (i+1) + " ORDER NO." + histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime')
     })
   }
   
-
-  return msg = {
-    type: 'text',
-    text: historyText
-  }
+  return msg
 }
