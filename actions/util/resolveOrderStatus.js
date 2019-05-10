@@ -3,19 +3,14 @@ const DB = require('../../config/firebase.config')
 module.exports = resolveOrderStatus = async event => {
   let allOrders = []
 
-  let a = await DB.collection('Orders')
-          .where('clientId', '==', event.source.userId)
-          .where('status', '==', 'shopping')
-          .get()
-
-  console.log(a)
-
   await DB.collection('Orders')
           .where('clientId', '==', event.source.userId)
           .where('status', '==', 'shopping')
           .onSnapshot(snapshot => {
             snapshot.forEach(doc => {
-              allOrders.push(doc.data().status)
+              console.log(doc.data())
+              console.log(doc.get('status'))
+              allOrders.push(doc.get('status'))
             })
           })
 
