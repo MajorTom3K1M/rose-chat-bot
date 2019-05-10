@@ -17,5 +17,16 @@ module.exports = showHistoryHandler = async event => {
     })
   }
   
-  return msg
+  return msg = {
+    type: 'flex',
+    altText: 'Shopping List',
+    contents: {
+      type: 'bubble',
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        contents = msg
+      }
+    }
+  }
 }
