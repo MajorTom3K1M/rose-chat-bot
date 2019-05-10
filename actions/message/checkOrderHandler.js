@@ -47,7 +47,7 @@ module.exports = checkOrderHandler = async event => {
           text: productNameMap.get(orderItems[i].itemId) + " x" + orderItems[i].qty,
           size: 'sm',
           color: '#555555',
-          flex: 0
+          wrap: true
         },
         {
           type: 'text',
