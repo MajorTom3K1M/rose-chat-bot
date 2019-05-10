@@ -115,7 +115,7 @@ module.exports = checkOrderHandler = async event => {
         contents: [
           {
             type: 'text',
-            text: 'ตัวอย่างใบเสร็จ',
+            text: 'รายการสินค้าในตะกร้า',
             weight: 'bold',
             color: '#1DB446',
             size: 'sm'
