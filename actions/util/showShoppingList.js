@@ -11,7 +11,8 @@ module.exports = showShoppingList = async (event) => {
           type: 'image',
           url: doc.data().picture,
           size: 'full',
-          aspectMode: 'cover'
+          aspectMode: 'cover',
+          aspectRatio: '20:13'
         },
         body: {
           type: 'box',
