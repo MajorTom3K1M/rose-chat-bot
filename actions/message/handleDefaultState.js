@@ -1,6 +1,6 @@
 const includesSome = require('../util/includesSome')
 
-const createOrderHandler = require('./createOrderHandler')
+const manageOrderHandler = require('./manageOrderHandler')
 const showHistoryHandler = require('./showHistoryHandler')
 
 module.exports = handleDefaultState = event => {
@@ -10,8 +10,8 @@ module.exports = handleDefaultState = event => {
   }
 
   let eventText = event.message.text.toLowerCase()
-  if (includesSome(eventText, ['buy', 'ซื้อ', 'รายการสินค้า', 'ลิสต์สินค้า', 'ลิสสินค้า', 'list สินค้า', 'product list'])) {
-    msg = createOrderHandler(event)
+  if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์', 'ลิส', 'สินค้า', 'product', 'buy', 'ซื้อ'])) {
+    msg = manageOrderHandler(event)
   }
   else if (includesSome(eventText, ['examine', 'check', 'เช็ค', 'ประวัติการสั่งซื้อ', 'history'])) {
     msg = showHistoryHandler(event)
