@@ -21,7 +21,7 @@ module.exports = postbackEventHandler = async event => {
       await manageOrder(params.clientId, params.items)
       msg = {
         type: 'text',
-        text: 'ขอบคุณที่ซื้อของหนูนะคะ _/\_ หากต้องการชำระเงินให้พิมพ์คำว่าชำระเงินได้เลยเจ้าค่ะ'
+        text: 'ขอบคุณที่ซื้อนะเจ้าคะ หากต้องการชำระเงินให้พิมพ์ว่าชำระเงินได้เลยค่ะ'
       }
       break
   }
