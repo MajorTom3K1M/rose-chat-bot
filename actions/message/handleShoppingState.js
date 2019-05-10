@@ -3,7 +3,7 @@ const includesSome = require('../util/includesSome')
 const cancelOrderHandler = require('./cancelOrderHandler')
 const checkOrderHandler = require('./checkOrderHandler')
 const resolveOrderHandler = require('./resolveOrderHandler')
-const updateOrderHandler = require('./updateOrderHandler')
+const manageOrderHandler = require('./manageOrderHandler')
 
 module.exports = handleShoppingState = async event => {
   let msg = {
@@ -12,8 +12,8 @@ module.exports = handleShoppingState = async event => {
   }
 
   let eventText = event.message.text.toLowerCase()
-  if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์', 'ลิส', 'สินค้า', 'product'])) {
-    msg = updateOrderHandler(event)
+  if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์', 'ลิส', 'สินค้า', 'product', 'buy', 'ซื้อ'])) {
+    msg = manageOrderHandler(event)
   }
   else if (includesSome(eventText, ['ตรวจสอบ', 'examine', 'cart', 'ตะกร้า'])) {
     msg = await checkOrderHandler(event)

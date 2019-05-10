@@ -1,7 +1,7 @@
 const showShoppingList = require('../util/showShoppingList')
 
-module.exports = createOrderHandler = async event => {
-  let contentList = await showShoppingList(event, "createorder")
+module.exports = manageOrderHandler = async event => {
+  let contentList = await showShoppingList(event)
 
   return msg = {
     type: 'flex',
