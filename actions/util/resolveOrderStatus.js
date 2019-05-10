@@ -7,19 +7,8 @@ module.exports = resolveOrderStatus = async event => {
                         .where('status', '<', 'cancelled').where('status', '>', 'cancelled')
                         .get()
 
-  let status = "None"
-
-  order.forEach(doc => {
-    if (!doc.exists) {
-      console.log('No such document!')
-    } 
-    else {
-      status = doc.data().status
-    }
-  })
-  .catch(err => {
-    console.log('Error getting document', err)
-  })
-
-  return status
+  if (order.size() == 0) return "None"
+  
+  let currentOrder = order.docs.pop()
+  return currentOrder.data().status
 }
