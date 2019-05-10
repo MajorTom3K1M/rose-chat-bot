@@ -16,7 +16,7 @@ module.exports = checkOrderHandler = async event => {
                                   .get()
   let productDocs = productCollection.docs
 
-  for(doc in productDocs) {
+  for(product in productDocs) {
     productMap.set(product.id, product.data().price)
     productNameMap.set(product.id, product.data().title)
   }
