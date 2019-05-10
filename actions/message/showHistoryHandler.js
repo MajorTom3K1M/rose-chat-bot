@@ -4,7 +4,7 @@ module.exports = showHistoryHandler = async event => {
   const historyCollection = await DB.collection('Orders')
                                     .where('clientId', '==', event.source.userId)
                                     .where('status', '==', 'shipped')
-                                    .orderBy('shippedDate')
+                                    .orderBy('shippedTime')
                                     .limit(5)
                                     .get()
   
@@ -13,7 +13,8 @@ module.exports = showHistoryHandler = async event => {
   let histories = historyCollection.docs
   for(i = 0; i < histories.length; i++) {
     msg.push({
-      type: ''
+      type: 'text',
+      text: histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime')
     })
   }
   
