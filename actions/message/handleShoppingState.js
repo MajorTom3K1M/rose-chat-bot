@@ -13,7 +13,7 @@ module.exports = handleShoppingState = async event => {
 
   let eventText = event.message.text.toLowerCase()
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์', 'ลิส', 'สินค้า', 'product', 'buy', 'ซื้อ'])) {
-    msg = manageOrderHandler(event)
+    msg = await manageOrderHandler(event)
   }
   else if (includesSome(eventText, ['ตรวจสอบ', 'examine', 'cart', 'ตะกร้า'])) {
     msg = await checkOrderHandler(event)

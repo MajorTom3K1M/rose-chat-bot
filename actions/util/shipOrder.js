@@ -10,7 +10,7 @@ module.exports = checkoutOrder = async event => {
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
       await DB.collection('Orders')
               .doc(order.id)
-              .set({shippedAt: new Date()})
+              .set({shippedAt: toString(new Date())})
       await DB.collection('Orders')
               .doc(order.id)
               .update({status: 'shipped'})
