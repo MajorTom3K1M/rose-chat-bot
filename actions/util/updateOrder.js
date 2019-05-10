@@ -1,4 +1,5 @@
 const DB = require('../../config/firebase.config')
+var admin = require('firebase-admin');
 
 module.exports = updateOrder = async (clientId, itemId) => {
   let userOrderCollection = await DB.collection('Orders')
@@ -8,20 +9,22 @@ module.exports = updateOrder = async (clientId, itemId) => {
   userOrderDocs.forEach(order => {
     let userStatus = order.get('status')
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
-      order.forEach(async doc => {
-        let index = doc.data().items.findIndex(item => itemId === item.itemId)
-        let item = doc.data().items[index]
-        await DB.collection('Orders')
-                .doc(doc.id)
-                .update({items: [
-                          ...doc.data().items.slice(0, index),
-                          { 
-                            ...item, 
-                            qty: Number(item.qty) + 1
-                          },
-                          ...doc.data().items.slice(index + 1)
-                        ]})
-      })
+      let itemList = order.data().items
+      let isUpdated = false
+      for(i = 0; i < itemList.length; i++) {
+        if(itemList[i].itemId === itemId) {
+          itemList[i].qty += 1
+          isUpdated = true
+        }
+      }
+      if(!isUpdated) {
+        order.ref.update({
+          items: admin.firestore.FieldValue.arrayUnion({
+            itemId: itemId,
+            qty: 1
+          })
+        })
+      }
     }
   })
 }
