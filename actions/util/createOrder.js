@@ -10,10 +10,11 @@ module.exports = createOrder = async (clientId, items) => {
       items: [
         {
           itemId: items,
-          qty: 1
+          qty: 1,
         }
       ],
-      status: "shopping"
+      status: "shopping",
+      createdAt: new Date()
     }).then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
     }).catch((err) => {
