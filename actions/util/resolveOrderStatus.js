@@ -1,24 +1,29 @@
 const DB = require('../../config/firebase.config')
 
-module.exports = resolveOrderStatus = async (event, status) => {
-    await DB.collection('Orders')
-      .where('clientId', '==', event.source.userId)
-      .where('status', '==', 'shopping')
-      .onSnapshot(snapshot => {
-        snapshot.forEach(doc => {
-          console.log(doc.get('status'))
-          status = doc.get('status')
-        })
+module.exports = resolveOrderStatus = event => {
+  let status = 'None'
+  
+  DB.collection('Orders')
+    .where('clientId', '==', event.source.userId)
+    .where('status', '==', 'shopping')
+    .onSnapshot(snapshot => {
+      snapshot.forEach(doc => {
+        console.log(doc.get('status'))
+        status = doc.get('status')
       })
+    })
 
-    await DB.collection('Orders')
-      .where('clientId', '==', event.source.userId)
-      .where('status', '==', 'paying')
-      .onSnapshot(snapshot => {
-        snapshot.forEach(doc => {
-          status = doc.get('status')
-        })
+  DB.collection('Orders')
+    .where('clientId', '==', event.source.userId)
+    .where('status', '==', 'paying')
+    .onSnapshot(snapshot => {
+      snapshot.forEach(doc => {
+        status = doc.get('status')
       })
+    })
+
+  return status
+  
 
   /*
   console.log(orderSnapshot)
