@@ -1,7 +1,6 @@
 const DB = require('../../config/firebase.config')
-const getProductFromOrder = require('../util/getProductFromOrder')
 
-module.export = checkOrderHandler = async event => {
+module.exports = checkOrderHandler = async event => {
   let userOrderCollection = await DB.collection('Orders')
                                     .where('clientId', '==', event.source.userId)
                                     .where('status', '==', 'shopping')
