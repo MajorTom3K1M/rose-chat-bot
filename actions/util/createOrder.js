@@ -18,7 +18,7 @@ module.exports = createOrder = async (clientId, items) => {
           }
         ],
         status: "shopping",
-        createdTime: toString(new Date())
+        createdTime: new Date()
       }
     ).then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
