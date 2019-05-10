@@ -7,7 +7,10 @@ module.exports = resolveOrderStatus = async event => {
                         .where('status', '<', 'cancelled').where('status', '>', 'cancelled')
                         .get()
 
-  if (orderSnapshot.docs.exists) return "None"                      
-  let currentOrderStatus = orderSnapshot.docs.get('status')
+  console.log(orderSnapshot)
+
+  let orderDocs = orderSnapshot.docs
+  if (orderDocs.length <= 0) return "None"                      
+  let currentOrderStatus = orderDocs[0].get('status')
   return currentOrderStatus
 }
