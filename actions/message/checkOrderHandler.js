@@ -12,15 +12,14 @@ module.exports = checkOrderHandler = async event => {
   let productMap = new Map()
   let productNameMap = new Map()
 
-  let productCollection = await DB.collection('Product')
-                                  .get()
-
-  productCollection.forEach(product => {
-    console.log("product")
-    console.log(product)
-    productMap.set(product.id, product.get('price'))
-    productNameMap.set(product.id, product.get('title'))
-  })
+  await DB.collection('Product')
+          .get()
+          .forEach(product => {
+            console.log("product")
+            console.log(product)
+            productMap.set(product.id, product.get('price'))
+            productNameMap.set(product.id, product.get('title'))
+          })
 
   let order = await DB.collection('Orders')
                       .doc(orderId)
