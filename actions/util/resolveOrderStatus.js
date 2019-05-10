@@ -6,8 +6,8 @@ module.exports = resolveOrderStatus = async clientId => {
                                 .get()
   let userOrderDocs = userOrderCollection.docs
   let userStatus = 'None'
-  while(userOrderDocs.length > 0) {
-    userStatus = userOrderDocs.pop().get('status')
+  for(i = 0; i < userOrderDocs.length; i++) {
+    userStatus = userOrderDocs[i].get('status')
     if(userStatus != 'shopping' && userStatus != 'paying') {
       userStatus = 'None'
     }
