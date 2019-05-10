@@ -12,13 +12,11 @@ module.exports = checkOrderHandler = async event => {
   let productCollection = await DB.collection('Product')
                                   .get()
 
-  let productList = productCollection.docs
+
   let productMap = new Map()
-  productList.forEach(product => {
-    productMap.set(key=product.id, product.data().price)
-  })
   let productNameMap = new Map()
-  productList.forEach(product => {
+  productCollection.docs.forEach(product => {
+    productMap.set(key=product.id, product.data().price)
     productNameMap.set(key=product.id, product.data().title)
   })
 
