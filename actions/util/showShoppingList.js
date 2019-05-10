@@ -38,7 +38,7 @@ module.exports = showShoppingList = async (event, actionName) => {
           },
           {
             type: 'text',
-            text: 'เหลือ' + doc.data().quantity + ' ชิ้น'
+            text: 'เหลือ ' + doc.data().quantity + ' ชิ้น'
           }
         ]
       },
