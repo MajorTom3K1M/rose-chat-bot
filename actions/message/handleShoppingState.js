@@ -18,10 +18,10 @@ module.exports = handleShoppingState = event => {
   else if (includesSome(eventText, ['ตรวจสอบ', 'check cart', 'shopping cart', 'cart', 'cart list', 'list'])) {
     msg = checkOrderHandler(event)
   }
-  else if (includesSome(eventText, ['ชำระเงิน', 'ยืนยันรายการ', 'pay now', 'payment', 'checkout', 'check out'])) {
+  else if (includesSome(eventText, ['ชำระ', 'ยืนยัน', 'pay', 'payment', 'checkout', 'check out'])) {
     msg = resolveOrderHandler(event)
   }
-  else if (includesSome(eventText, ['ยกเลิก', 'cancel'])) {
+  else if (includesSome(eventText, ['ไม่', 'cancel', 'เลิก', 'delete', 'ลบ', 'remove'])) {
     msg = cancelOrderHandler(event)
   }
 

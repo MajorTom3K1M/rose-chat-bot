@@ -1,9 +1,7 @@
-const resolveOrderSnapshot = require('../util/resolveOrderByStatus')
+const deleteOrder = require('../util/deleteOrder')
 
-module.exports = cancelOrderHandler = event => {
-  resolveOrderSnapshot(event, 'shopping')
-    .then(result => result.update({status: "cancelled"}))
-
+module.exports = cancelOrderHandler = async event => {
+  await deleteOrder(event)
   return msg = {
       type: 'text',
       text: 'ยกเลิกรายการปัจจุบัน'

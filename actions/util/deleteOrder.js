@@ -1,18 +1,16 @@
 const DB = require('../../config/firebase.config')
 
-module.exports = createOrder = async (clientId, items) => {
-  await DB.collection('Orders').add({
-    clientId: clientId,
-    items: [
-      {
-        itemId: items,
-        qty: 1
-      }
-    ],
-    status: "shopping"
-  }).then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
-  }).catch((err) => {
-      console.error("Error adding document: ", err);
-  })
+module.exports = deleteOrder = async event => {
+  let userOrderCollection = await DB.collection('Orders')
+                                .where('clientId', '==', event.source.userId)
+                                .get()
+  let userOrderDocs = userOrderCollection.docs
+  while(userOrderDocs.length > 0) {
+    orderId = userOrderDocs.pop().id
+    if(userStatus != 'cancelled' && userStatus != 'shipped') {
+      await DB.collection('Orders')
+              .doc(orderId)
+              .update({status: 'cancelled'})
+    }
+  }
 }
