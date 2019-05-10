@@ -17,7 +17,10 @@ module.exports = updateOrder = async (clientId, itemId) => {
           isUpdated = true
         }
       }
-      if(!isUpdated) {
+      if(isUpdated) {
+        order.ref.update({ items: itemList })
+      }
+      else {
         order.ref.update({
           items: admin.firestore.FieldValue.arrayUnion({
             itemId: itemId,
