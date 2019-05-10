@@ -16,9 +16,11 @@ module.exports = checkOrderHandler = async event => {
                                   .get()
   let productDocs = productCollection.docs
 
+  console.log(productDocs)
+
   for(product in productDocs) {
-    productMap.set(product.id, product.data().price)
-    productNameMap.set(product.id, product.data().title)
+    productMap.set(product.id, product.price)
+    productNameMap.set(product.id, product.title)
   }
 
   console.log(productMap)
@@ -31,7 +33,7 @@ module.exports = checkOrderHandler = async event => {
   let totalQuantity = 0
   let itemListContent = []
   let orderItems = order.data().items
-  
+
   for(item in orderItems) {
     totalQuantity += parseInt(item.qty)
     totalPrice += parseFloat(productMap.get(item.itemId)) * parseInt(item.qty)
