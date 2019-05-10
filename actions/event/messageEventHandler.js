@@ -15,19 +15,13 @@ const shippingHandler = require('../location/shippingHandler')
 module.exports = handleMessageEvent = async event => {
     let eventText = event.message.text.toLowerCase()
 
-    let msg = {
+    let msg = [{
         type: 'text',
         text: 'หนูไม่เข้าใจค่ะ ช่วยพิมพ์ใหม่ให้หนูอีกครั้งนะคะ'
-    }
+    }]
 
     if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
         msg = rudeWordHandler(event)
-        let stickerMsg = {
-            type: 'sticker',
-            packageId: '11537',
-            stickerId: '52002767'
-        }
-        client.replyMessage(event.replyToken, stickerMsg)
     } 
     else if (includesSome(eventText, ['debug'])) {
        msg = debugHandler(event)
