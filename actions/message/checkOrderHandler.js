@@ -16,15 +16,10 @@ module.exports = checkOrderHandler = async event => {
                                   .get()
   let productDocs = productCollection.docs
 
-  console.log(productDocs[0])
-
   for(i = 0; i < productDocs.length; i++) {
-    console.log(productDocs[i].id + " " + productDocs[i].get('price') + " " + productDocs[i].get('title'))
     productMap.set(productDocs[i].id, productDocs[i].get('price'))
     productNameMap.set(productDocs[i].id, productDocs[i].get('title'))
   }
-
-  console.log(productMap)
 
   let order = await DB.collection('Orders')
                       .doc(orderId)
