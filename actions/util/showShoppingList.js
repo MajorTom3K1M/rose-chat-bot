@@ -49,11 +49,11 @@ module.exports = showShoppingList = async (event, actionName) => {
         contents: [
           {
             type: 'button',
-            style: 'primary',
+            style: doc.data().quantity > 0 ? 'primary' : 'secondary',
             action: {
               type: 'postback',
-              label: 'ใส่ตะกร้า',
-              data: '?action=' + actionName + '&items=' + doc.id + '&clientId=' + event.source.userId
+              label: doc.data().quantity > 0 ? 'ใส่ตะกร้า' : 'สินค้าหมดค่ะ',
+              data: doc.data().quantity > 0 ? '?action=' + actionName + '&items=' + doc.id + '&clientId=' + event.source.userId : ''
             }
           }
         ]
