@@ -16,12 +16,12 @@ module.exports = checkOrderHandler = async event => {
                                   .get()
   let productDocs = productCollection.docs
 
-  console.log(productDocs)
+  console.log(productDocs[0])
 
-  for(product in productDocs) {
-    console.log(product.id + " " + product.price + " " + product.title)
-    productMap.set(product.id, product.price)
-    productNameMap.set(product.id, product.title)
+  for(i = 0; i < productDocs.length; i++) {
+    console.log(productDocs[i].id + " " + productDocs[i].get('price') + " " + productDocs[i].get('title'))
+    productMap.set(productDocs[i].id, productDocs[i].get('price'))
+    productNameMap.set(productDocs[i].id, productDocs[i].get('title'))
   }
 
   console.log(productMap)
