@@ -19,10 +19,25 @@ module.exports = postbackEventHandler = async event => {
   switch(params.action) {
     case 'manageorder':
       await manageOrder(params.clientId, params.items)
-      msg = {
-        type: 'text',
-        text: 'ขอบคุณที่ซื้อนะเจ้าคะ หากต้องการชำระเงินให้พิมพ์ว่าชำระเงินได้เลยค่ะ'
-      }
+      msg = [
+        {
+          type: 'text',
+          text: 'ขอบคุณที่ซื้อนะเจ้าคะ'
+        },
+        {
+          type: 'sticker',
+          packageId: '11537',
+          stickerId: '52002742'
+        },
+        {
+          type: 'text',
+          text: 'หากต้องการชำระเงินให้พิมพ์ \'ชำระเงิน\' ได้เลยค่ะ'
+        },
+        {
+          type: 'text',
+          text: 'หากต้องการตรวจสอบตะกร้าสินค้า ให้พิมพ์ \'ตะกร้า\' ค่ะ'
+        }
+      ]
       break
   }
 

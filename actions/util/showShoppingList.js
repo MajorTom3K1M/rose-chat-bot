@@ -32,7 +32,8 @@ module.exports = showShoppingList = async (event) => {
             },
             {
               type: 'text',
-              text: 'ยอดสินค้าคงเหลือ ' + doc.data().quantity + ' ชิ้น'
+              text: 'ยอดสินค้าคงเหลือ ' + doc.data().quantity + ' ชิ้น',
+              size: 's'
             }
           ]
         },
@@ -84,7 +85,7 @@ module.exports = showShoppingList = async (event) => {
               type: 'text',
               text: 'หมดแล้วค่ะ T^T',
               color: '#ff5551',
-              size: 'xs'
+              size: 's'
             }
           ]
         },

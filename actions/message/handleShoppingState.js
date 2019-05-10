@@ -15,10 +15,10 @@ module.exports = handleShoppingState = async event => {
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์', 'ลิส', 'สินค้า', 'product'])) {
     msg = updateOrderHandler(event)
   }
-  else if (includesSome(eventText, ['ตรวจสอบ', 'examine', 'cart', 'list', 'list'])) {
+  else if (includesSome(eventText, ['ตรวจสอบ', 'examine', 'cart', 'ตะกร้า'])) {
     msg = await checkOrderHandler(event)
   }
-  else if (includesSome(eventText, ['ชำระ', 'ยืนยัน', 'pay', 'payment', 'checkout', 'check out'])) {
+  else if (includesSome(eventText, ['ชำระ', 'ยืนยัน', 'pay', 'payment', 'checkout', 'check out', 'เสร็จ', 'เรียบร้อย'])) {
     msg = resolveOrderHandler(event)
   }
   else if (includesSome(eventText, ['ไม่', 'cancel', 'เลิก', 'delete', 'ลบ', 'remove'])) {
