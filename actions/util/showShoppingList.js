@@ -38,7 +38,7 @@ module.exports = showShoppingList = async event => {
 						text:
 							parseInt(doc.data().quantity) > 0
 								? ''
-								: 'สินค้าชิ้นนี้หมดชั่วคราวนะคะ',
+								: 'สินค้าชิ้นนี้หมดชั่วคราวนะคะ TT',
 						color: '#ff5551',
 						size: 'xs'
 					}
