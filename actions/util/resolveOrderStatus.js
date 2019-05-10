@@ -13,16 +13,18 @@ module.exports = resolveOrderStatus = async event => {
 
   await DB.collection('Orders')
           .where('clientId', '==', event.source.userId)
-          .where('status', '==', 'cancelled')
+          .where('status', '==', 'paying')
           .onSnapshot(snapshot => {
             snapshot.forEach(doc => {
               allOrders.push(doc.data().status)
             })
           })
+
+  console.log(allOrders)
           
   let status = allOrders.length <= 0 ? 'None' : allOrders.pop()
   return status
-  
+
   /*
   console.log(orderSnapshot)
 
