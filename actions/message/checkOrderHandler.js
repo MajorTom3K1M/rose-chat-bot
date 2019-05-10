@@ -9,20 +9,17 @@ module.exports = checkOrderHandler = async event => {
   let userOrderDocs = userOrderCollection.docs
   let orderId = userOrderDocs.pop().id
 
+  let productMap = new Map()
+  let productNameMap = new Map()
+
   let productCollection = await DB.collection('Product')
                                   .get()
 
-
-  let productMap = new Map()
-  let productNameMap = new Map()
   productCollection.docs.forEach(product => {
     console.log(product)
-    console.log(product.data())
     productMap.set(product.id, product.data().price)
     productNameMap.set(product.id, product.data().title)
   })
-
-  console.log(productMap)
 
   let order = await DB.collection('Orders')
                       .doc(orderId)
