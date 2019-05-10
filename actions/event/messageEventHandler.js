@@ -27,7 +27,7 @@ module.exports = handleMessageEvent = async event => {
        msg = debugHandler(event)
     }
     else {
-        let orderStatus = await resolveOrderStatus(event)
+        let orderStatus = await resolveOrderStatus(event.source.userId)
         console.log(orderStatus)
         switch(orderStatus) {
             case 'paying':

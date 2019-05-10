@@ -6,6 +6,6 @@ module.exports = paymentHandler = async event => {
     
   return msg = {
     type: 'text',
-    text: "จ่ายเงินแล้วจร้า กรุณาระบุทีสถานที่จัดส่งผ่านการ share location ด้วยค่ะ"
+    text: "จ่ายเงินแล้วจร้า กรุณาระบุสถานที่จัดส่งผ่านการ share location ด้วยค่ะ"
   }
 }

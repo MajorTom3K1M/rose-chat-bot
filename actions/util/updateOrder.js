@@ -1,9 +1,8 @@
 const DB = require('../../config/firebase.config')
-const admin = require('firebase-admin');
 
-module.exports = updateOrder = async (event, itemId) => {
+module.exports = updateOrder = async (clientId, itemId) => {
   let userOrderCollection = await DB.collection('Orders')
-                                .where('clientId', '==', event.source.userId)
+                                .where('clientId', '==', clientId)
                                 .get()
   let userOrderDocs = userOrderCollection.docs
   userOrderDocs.forEach(order => {
