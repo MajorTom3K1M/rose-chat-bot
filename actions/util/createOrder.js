@@ -1,9 +1,10 @@
 const DB = require('../../config/firebase.config')
 
 module.exports = createOrder = async (clientId, items) => {
-  let productQuantity = await DB.collection('Products')
+  let productCollection = await DB.collection('Products')
                                   .doc(items)
-                                  .get('quantity')
+                                  .get()
+  let productQuantity = productCollection.get('quantity')
   console.log("qty " + parseInt(productQuantity))
 
   if(parseInt(productQuantity) > 0) {
