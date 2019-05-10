@@ -4,7 +4,7 @@ module.exports = showShoppingList = async (event) => {
   let productsCollection = await DB.collection('Products').get()
   let contentList = []
   productsCollection.forEach(doc => {
-    if(doc.data().quantity > 0) {
+    if(parseInt(doc.data().quantity) > 0) {
       contentList.push({
         type: 'bubble',
         hero: {
@@ -101,7 +101,7 @@ module.exports = showShoppingList = async (event) => {
               action: {
                 type: 'uri',
                 label: 'ใส่ตะกร้า',
-                uri: ''
+                uri: 'https://blackpinkmerch.com/'
               }
             }
           ]
