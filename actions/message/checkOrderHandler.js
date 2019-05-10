@@ -33,6 +33,7 @@ module.exports = checkOrderHandler = async event => {
   orderItems.forEach(item => {
     totalQuantity += parseInt(item.qty)
     totalPrice += parseFloat(productMap.get(item.itemId)) * parseInt(item.qty)
+    console.log(totalQuantity + " " + totalPrice)
     itemListContent.push({
       type: 'box',
       layout: 'horizontal',
