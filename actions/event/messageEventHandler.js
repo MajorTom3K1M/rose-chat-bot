@@ -3,8 +3,8 @@ const configLine = require('../../config/line.config')
 const client = new line.Client(configLine);
 
 const resolveOrderStatus = require('../util/resolveOrderStatus')
-const handleShoppingState = require('../util/handleShoppingState')
-const handleDefaultState = require('../util/handleDefaultState')
+const handleShoppingState = require('../message/handleShoppingState')
+const handleDefaultState = require('../message/handleDefaultState')
 const includesSome = require('../util/includesSome')
 
 const debugHandler = require('../debug/debugHandler')
@@ -24,23 +24,24 @@ module.exports = handleMessageEvent = async event => {
         msg = rudeWordHandler(event)
     } 
     else if (includesSome(eventText, ['debug'])) {
-        msg = debugHandler(event)
+       msg = debugHandler(event)
     }
     else {
         let orderStatus = resolveOrderStatus(event)
         switch(orderStatus) {
             case 'paying':
-                if (event.message.type === "sticker") msg = paymentHandler(event)
+                if (event.message.type === "sticker")
+                    msg = paymentHandler(event)
                 break
             case 'shipping':
-                if (event.message.type === 'location') msg = shippingHandler(event)
+                if (event.message.type === 'location')
+                    msg = shippingHandler(event)
                 break
             case 'shopping':
                 msg = handleShoppingState(event)
                 break
             default:
                 msg = handleDefaultState(event)
-                break
         }
     }
 
