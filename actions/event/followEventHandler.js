@@ -7,6 +7,10 @@ module.exports = followEventHandler = event => {
         type: 'text',
         text: 'ขอบคุณที่กลับมาติดตามหนูนะคะ >///<'
     }
-
-    return client.replyMessage(event.replyToken, msg)
+    client.replyMessage(event.replyToken, msg)
+    return client.replyMessage(event.replyToken, {
+        "type": "sticker",
+        "packageId": "11537",
+        "stickerId": "52002747"
+    })
 }
