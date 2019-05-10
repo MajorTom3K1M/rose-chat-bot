@@ -23,7 +23,6 @@ module.exports = updateOrder = async (clientId, itemId) => {
                 { ...item, qty: Number(item.qty) + 1 },
                 ...doc.data().items.slice(index + 1)
               ]
-            }).then(() => res.status(200).json({ updated: true }))
-    .catch((err) => res.status(400).json({ message: "Bad Request" }));
+            })
   })
 }
