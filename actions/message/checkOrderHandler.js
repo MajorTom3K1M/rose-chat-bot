@@ -22,6 +22,8 @@ module.exports = checkOrderHandler = async event => {
     productNameMap.set(key=product.id, product.data().title)
   })
 
+  console.log(productMap)
+
   let order = await DB.collection('Orders')
                       .doc(orderId)
                       .get()
@@ -33,6 +35,7 @@ module.exports = checkOrderHandler = async event => {
   orderItems.forEach(item => {
     totalQuantity += parseInt(item.qty)
     totalPrice += parseFloat(productMap.get(item.itemId)) * parseInt(item.qty)
+    console.log(item.itemId + " " + productMap.get(item.itemId) + " " + parseFloat(productMap.get(item.itemId)) + " " + parseInt(item.qty))
     console.log(totalQuantity + " " + totalPrice)
     itemListContent.push({
       type: 'box',
@@ -73,7 +76,7 @@ module.exports = checkOrderHandler = async event => {
       },
       {
         type: 'text',
-        text: toString(totalQuantity),
+        text: '' + totalQuantity,
         size: 'sm',
         color: '#111111',
         align: 'end'
@@ -92,7 +95,7 @@ module.exports = checkOrderHandler = async event => {
       },
       {
         type: 'text',
-        text: '$' + toString(totalPrice),
+        text: '$' + totalPrice,
         size: 'sm',
         color: '#111111',
         align: 'end'
