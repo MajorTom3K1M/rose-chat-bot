@@ -12,7 +12,7 @@ module.exports = checkoutOrder = async event => {
       for(i = 0; i < items.length; i++) {
         await DB.collection('Products')
                 .doc(items[0].itemId)
-                .update({quantity: firebase.firestore.FieldValue.increment(-1)})
+                .update({quantity: DB.FieldValue.increment(-1)})
       }
       await DB.collection('Orders')
               .doc(order.id)
