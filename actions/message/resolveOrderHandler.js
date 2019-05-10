@@ -1,4 +1,3 @@
-const DB = require('../../config/firebase.config')
 const checkOrderHandler = require('./checkOrderHandler')
 const checkoutOrder = require('../util/checkoutOrder')
 

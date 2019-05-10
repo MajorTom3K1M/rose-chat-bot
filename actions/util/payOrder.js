@@ -10,6 +10,9 @@ module.exports = checkoutOrder = async event => {
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
       await DB.collection('Orders')
               .doc(order.id)
+              .set({payAt: new Date()})
+      await DB.collection('Orders')
+              .doc(order.id)
               .update({status: 'shipping'})
     }
   })
