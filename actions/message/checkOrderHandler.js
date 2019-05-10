@@ -127,7 +127,7 @@ module.exports = checkOrderHandler = async event => {
           },
           {
             type: 'text',
-            text: 'ROSE\' Shop',
+            text: 'Rosé Shop',
             weight: 'bold',
             size: 'xxl',
             margin: 'md'

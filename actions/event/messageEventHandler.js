@@ -22,6 +22,11 @@ module.exports = handleMessageEvent = async event => {
 
     if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
         msg = rudeWordHandler(event)
+        client.replyMessage(event.replyToken, {
+            "type": "sticker",
+            "packageId": "11537",
+            "stickerId": "52002767"
+        })
     } 
     else if (includesSome(eventText, ['debug'])) {
        msg = debugHandler(event)
@@ -31,7 +36,7 @@ module.exports = handleMessageEvent = async event => {
         console.log(orderStatus)
         switch(orderStatus) {
             case 'paying':
-                if (event.message.type === "sticker")
+                if (event.message.type === "image")
                     msg = paymentHandler(event)
                 break
             case 'shipping':
@@ -43,6 +48,11 @@ module.exports = handleMessageEvent = async event => {
                 break
             default:
                 msg = handleDefaultState(event)
+                client.replyMessage(event.replyToken, {
+                    "type": "sticker",
+                    "packageId": "11537",
+                    "stickerId": "52002735"
+                })
         }
     }
 
