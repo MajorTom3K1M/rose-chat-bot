@@ -3,7 +3,11 @@ const DB = require('../../config/firebase.config')
 module.exports = showShoppingList = async (event, actionName) => {
   let productsCollection = await DB.collection('Products').get()
   let contentList = []
+  
   productsCollection.forEach(doc => {
+    let footerStyle = (doc.data().quantity > 0) ? 'primary' : 'secondary'
+    let buttonText = (doc.data().quantity > 0) ? 'ใส่ตะกร้า' : 'สินค้าหมดค่ะ'
+    let actionQs = (doc.data().quantity > 0) ? ('?action=' + actionName + '&items=' + doc.id + '&clientId=' + event.source.userId) : ''
     contentList.push({
       type: 'bubble',
       header: {
@@ -49,11 +53,11 @@ module.exports = showShoppingList = async (event, actionName) => {
         contents: [
           {
             type: 'button',
-            style: (doc.data().quantity > 0) ? 'primary' : 'secondary',
+            style: footerStyle,
             action: {
               type: 'postback',
-              label: (doc.data().quantity > 0) ? 'ใส่ตะกร้า' : 'สินค้าหมดค่ะ',
-              data: (doc.data().quantity > 0) ? ('?action=' + actionName + '&items=' + doc.id + '&clientId=' + event.source.userId) : ''
+              label: buttonText,
+              data: actionQs
             }
           }
         ]
