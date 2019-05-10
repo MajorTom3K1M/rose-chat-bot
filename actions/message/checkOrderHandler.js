@@ -6,6 +6,8 @@ module.exports = checkOrderHandler = async event => {
                                     .where('status', '==', 'shopping')
                                     .get()
 
+  
+
   let userOrderDocs = userOrderCollection.docs
   let orderId = userOrderDocs.pop().id
   let order = await DB.collection('Orders')
@@ -15,31 +17,36 @@ module.exports = checkOrderHandler = async event => {
   let totalPrice = 0
   let totalQuantity = 0
   let itemListContent = []
+  
   let orderItems = order.data().items
   orderItems.forEach(async item => {
-    let itemObj = await DB.collection('Product').doc(item.itemId)
-    totalQuantity += parseInt(item.qty)
-    totalPrice += parseFloat(itemObj.get('price')) * parseInt(item.qty)
-    itemListContent.push({
-      type: 'box',
-      layout: 'horizontal',
-      contents: [
-        {
-          type: 'text',
-          text: itemObj.get('title') + " x" + item.qty,
-          size: 'sm',
-          color: '#555555',
-          flex: 0
-        },
-        {
-          type: 'text',
-          text: '$' + itemObj.get('price'),
-          size: 'sm',
-          color: '#111111',
-          align: 'end'
-        }
-      ]
-    })
+    await DB.collection('Product')
+            .doc(item.itemId)
+            .get()
+            .then(itemObj => {
+              totalQuantity += parseInt(item.qty)
+              totalPrice += parseFloat(itemObj.get('price')) * parseInt(item.qty)
+              itemListContent.push({
+                type: 'box',
+                layout: 'horizontal',
+                contents: [
+                  {
+                    type: 'text',
+                    text: itemObj.get('title') + " x" + item.qty,
+                    size: 'sm',
+                    color: '#555555',
+                    flex: 0
+                  },
+                  {
+                    type: 'text',
+                    text: '$' + itemObj.get('price'),
+                    size: 'sm',
+                    color: '#111111',
+                    align: 'end'
+                  }
+                ]
+              })
+            })
   })
 
   itemListContent.push({
