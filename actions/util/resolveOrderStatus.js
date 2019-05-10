@@ -1,8 +1,8 @@
 const DB = require('../../config/firebase.config')
 
-module.exports = resolveOrderStatus = async event => {
+module.exports = resolveOrderStatus = async clientId => {
   let userOrderCollection = await DB.collection('Orders')
-                                .where('clientId', '==', event.source.userId)
+                                .where('clientId', '==', clientId)
                                 .get()
   let userOrderDocs = userOrderCollection.docs
   let userStatus = 'None'
@@ -13,6 +13,5 @@ module.exports = resolveOrderStatus = async event => {
     }
   }
   
-  console.log(userStatus)
   return userStatus
 }

@@ -1,6 +1,6 @@
 const DB = require('../../config/firebase.config')
 
-module.exports = showShoppingList = async (event, actionName) => {
+module.exports = showShoppingList = async (event) => {
   let productsCollection = await DB.collection('Products').get()
   let contentList = []
   productsCollection.forEach(doc => {
@@ -53,7 +53,7 @@ module.exports = showShoppingList = async (event, actionName) => {
             action: {
               type: 'postback',
               label: 'ใส่ตะกร้า',
-              data: '?action=' + actionName + '&items=' + doc.id + '&clientId=' + event.source.userId
+              data: '?action=manageorder&items=' + doc.id + '&clientId=' + event.source.userId
             }
           }
         ]

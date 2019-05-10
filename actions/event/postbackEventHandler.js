@@ -5,8 +5,7 @@ const client = new line.Client(configLine);
 const url = require('url');  
 const querystring = require('querystring');
 
-const createOrder = require('../util/createOrder')
-const updateOrder = require('../util/updateOrder')
+const manageOrder = require('../util/manageOrder')
 
 module.exports = postbackEventHandler = async event => {
   let parsedUrl = url.parse(event.postback.data);  
@@ -14,22 +13,15 @@ module.exports = postbackEventHandler = async event => {
 
   let msg = {
     type: 'text',
-    text: 'พี่กดปุ่มอะไรนะคะ หนูไม่เข้าใจค่ะ'
+    text: 'พี่กดปุ่มอะไรอะ หนูไม่เข้าใจ'
   }
 
   switch(params.action) {
-    case 'createorder':
-      await createOrder(params.clientId, params.items)
+    case 'manageorder':
+      await manageOrder(params.clientId, params.items)
       msg = {
         type: 'text',
-        text: 'ขอบคุณที่ซื้อนะคะ หากต้องการชำระเงินให้พิมพ์คำว่าชำระเงินได้เลยเจ้าค่ะ'
-      }
-      break
-    case 'updateorder':
-      await updateOrder(params.clientId, params.items)
-      msg = {
-        type: 'text',
-        text: 'โอ้ะ ซื้อของหนูเพิ่มอีกด้วยหรอคะ ดีใจจังเลย หากต้องการชำระเงินให้พิมพ์คำว่าชำระเงินได้เลยเจ้าค่ะ'
+        text: 'ขอบคุณที่ซื้อของหนูนะคะ _/\_ หากต้องการชำระเงินให้พิมพ์คำว่าชำระเงินได้เลยเจ้าค่ะ'
       }
       break
   }
