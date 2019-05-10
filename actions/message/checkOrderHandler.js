@@ -8,21 +8,6 @@ module.exports = checkOrderHandler = async event => {
 
   let userOrderDocs = userOrderCollection.docs
   let orderId = userOrderDocs.pop().id
-
-  let productMap = new Map()
-  let productNameMap = new Map()
-
-  await DB.collection('Product')
-          .listDocuments()
-          .then(docs => {
-            docs.forEach(doc => {
-              console.log("product")
-              console.log(doc)
-              productMap.set(doc.id, doc.get('price'))
-              productNameMap.set(doc.id, doc.get('title'))
-            })
-          })
-
   let order = await DB.collection('Orders')
                       .doc(orderId)
                       .get()
@@ -32,24 +17,23 @@ module.exports = checkOrderHandler = async event => {
   let itemListContent = []
   let orderItems = order.data().items
   orderItems.forEach(item => {
+    let itemObj = await DB.collection('Product').doc(item.itemId)
     totalQuantity += parseInt(item.qty)
-    totalPrice += parseFloat(productMap.get(item.itemId)) * parseInt(item.qty)
-    console.log(item.itemId + " " + productMap.get(item.itemId) + " " + parseFloat(productMap.get(item.itemId)) + " " + parseInt(item.qty))
-    console.log(totalQuantity + " " + totalPrice)
+    totalPrice += parseFloat(itemObj.get('price')) * parseInt(item.qty)
     itemListContent.push({
       type: 'box',
       layout: 'horizontal',
       contents: [
         {
           type: 'text',
-          text: productNameMap.get(item.itemId) + " x" + item.qty,
+          text: itemObj.get('title') + " x" + item.qty,
           size: 'sm',
           color: '#555555',
           flex: 0
         },
         {
           type: 'text',
-          text: '$' + productMap.get(item.itemId),
+          text: '$' + itemObj.get('price'),
           size: 'sm',
           color: '#111111',
           align: 'end'
