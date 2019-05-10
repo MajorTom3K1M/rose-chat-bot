@@ -33,25 +33,25 @@ module.exports = checkOrderHandler = async event => {
   let totalPrice = 0
   let totalQuantity = 0
   let itemListContent = []
-  let orderItems = order.data().items
+  let orderItems = order.get('items')
 
-  for(item in orderItems) {
-    totalQuantity += parseInt(item.qty)
-    totalPrice += parseFloat(productMap.get(item.itemId)) * parseInt(item.qty)
+  for(i = 0; i < orderItems.length; i++) {
+    totalQuantity += parseInt(orderItems[i].qty)
+    totalPrice += parseFloat(productMap.get(orderItems[i].itemId)) * parseInt(orderItems[i].qty)
     itemListContent.push({
       type: 'box',
       layout: 'horizontal',
       contents: [
         {
           type: 'text',
-          text: productNameMap.get(item.itemId) + " x" + item.qty,
+          text: productNameMap.get(orderItems[i].itemId) + " x" + orderItems[i].qty,
           size: 'sm',
           color: '#555555',
           flex: 0
         },
         {
           type: 'text',
-          text: '$' + productMap.get(item.itemId),
+          text: '$' + productMap.get(orderItems[i].itemId),
           size: 'sm',
           color: '#111111',
           align: 'end'
