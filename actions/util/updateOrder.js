@@ -19,7 +19,7 @@ module.exports = updateOrder = async (clientId, itemId) => {
       let isUpdated = false
       for(i = 0; i < itemList.length; i++) {
         if(itemList[i].itemId === itemId) {
-          if(productQuantity - itemList[i].qty < 0) {
+          if(parseInt(productQuantity) - parseInt(itemList[i].qty) < 0) {
             return Promise.resolve(null)
           }
           itemList[i].qty += 1
@@ -30,7 +30,7 @@ module.exports = updateOrder = async (clientId, itemId) => {
         order.ref.update({ items: itemList })
       }
       else {
-        if(productQuantity - 1 < 0) {
+        if(parseInt(productQuantity) - 1 < 0) {
           return Promise.resolve(null)
         }
         order.ref.update({

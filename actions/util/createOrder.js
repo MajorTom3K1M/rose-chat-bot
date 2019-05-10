@@ -6,7 +6,7 @@ module.exports = createOrder = async (clientId, items) => {
                                   .get()
 
   let productQuantity = productCollection.docs.pop().get('quantity')
-  if(productQuantity > 0) {
+  if(parseInt(productQuantity) > 0) {
     await DB.collection('Orders').add({
       clientId: clientId,
       items: [
