@@ -16,6 +16,8 @@ module.exports = checkOrderHandler = async event => {
   let productMap = new Map()
   let productNameMap = new Map()
   productCollection.docs.forEach(product => {
+    console.log(product
+    console.log(product.data())
     productMap.set(key=product.id, product.data().price)
     productNameMap.set(key=product.id, product.data().title)
   })
