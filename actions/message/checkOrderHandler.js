@@ -16,7 +16,7 @@ module.exports = checkOrderHandler = async event => {
   let totalQuantity = 0
   let itemListContent = []
   let orderItems = order.data().items
-  orderItems.forEach(item => {
+  orderItems.forEach(async item => {
     let itemObj = await DB.collection('Product').doc(item.itemId)
     totalQuantity += parseInt(item.qty)
     totalPrice += parseFloat(itemObj.get('price')) * parseInt(item.qty)
