@@ -9,7 +9,7 @@ module.exports = resolveOrderStatus = async event => {
           .onSnapshot(snapshot => {
             snapshot.forEach(doc => {
               console.log(doc.get('status'))
-              status = doc.get('status')
+              statusPromise = Promise.resolve(doc.get('status'))
             })
           })
 
@@ -18,11 +18,11 @@ module.exports = resolveOrderStatus = async event => {
           .where('status', '==', 'paying')
           .onSnapshot(snapshot => {
             snapshot.forEach(doc => {
-              status = doc.get('status')
+              statusPromise = Promise.resolve(doc.get('status'))
             })
           })
           
-  return Promise.resolve(status)
+  return Promise.resolve(statusPromise)
 
   /*
   console.log(orderSnapshot)
