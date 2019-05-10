@@ -22,11 +22,12 @@ module.exports = handleMessageEvent = async event => {
 
     if (includesSome(eventText, ['fuck', 'fuxk', 'ควย', 'สัส', 'เหี้ย', 'ชิบหาย', 'มึง', 'กู', 'เย็ด', 'เชี่ย', 'fu*k', 'ค ว ย', 'ห่า', 'หำ', 'หี', 'ระยำ'])) {
         msg = rudeWordHandler(event)
-        client.replyMessage(event.replyToken, {
-            "type": "sticker",
-            "packageId": "11537",
-            "stickerId": "52002767"
-        })
+        let stickerMsg = {
+            type: 'sticker',
+            packageId: '11537',
+            stickerId: '52002767'
+        }
+        client.replyMessage(event.replyToken, stickerMsg)
     } 
     else if (includesSome(eventText, ['debug'])) {
        msg = debugHandler(event)
@@ -48,11 +49,6 @@ module.exports = handleMessageEvent = async event => {
                 break
             default:
                 msg = handleDefaultState(event)
-                client.replyMessage(event.replyToken, {
-                    "type": "sticker",
-                    "packageId": "11537",
-                    "stickerId": "52002735"
-                })
         }
     }
 
