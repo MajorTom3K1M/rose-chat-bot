@@ -19,6 +19,7 @@ module.exports = checkOrderHandler = async event => {
   console.log(productDocs)
 
   for(product in productDocs) {
+    console.log(product.id + " " + product.price + " " + product.title)
     productMap.set(product.id, product.price)
     productNameMap.set(product.id, product.title)
   }
