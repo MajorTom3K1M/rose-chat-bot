@@ -6,7 +6,9 @@ module.exports = deleteOrder = async event => {
                                 .get()
   let userOrderDocs = userOrderCollection.docs
   while(userOrderDocs.length > 0) {
-    orderId = userOrderDocs.pop().id
+    order = userOrderDocs.pop()
+    userStatus = order.get('status')
+    orderId = order.id
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
       await DB.collection('Orders')
               .doc(orderId)
