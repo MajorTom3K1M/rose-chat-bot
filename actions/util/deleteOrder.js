@@ -5,14 +5,12 @@ module.exports = deleteOrder = async event => {
                                 .where('clientId', '==', event.source.userId)
                                 .get()
   let userOrderDocs = userOrderCollection.docs
-  while(userOrderDocs.length > 0) {
-    order = userOrderDocs.pop()
-    userStatus = order.get('status')
-    orderId = order.id
+  userOrderDocs.forEach(order => {
+    let userStatus = order.get('status')
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
       await DB.collection('Orders')
-              .doc(orderId)
+              .doc(order.id)
               .update({status: 'cancelled'})
     }
-  }
+  })
 }
