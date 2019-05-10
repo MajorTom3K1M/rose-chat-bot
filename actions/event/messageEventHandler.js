@@ -39,10 +39,10 @@ module.exports = handleMessageEvent = async event => {
                     msg = shippingHandler(event)
                 break
             case 'shopping':
-                msg = handleShoppingState(event)
+                msg = await handleShoppingState(event)
                 break
             default:
-                msg = handleDefaultState(event)
+                msg = await handleDefaultState(event)
         }
     }
 
