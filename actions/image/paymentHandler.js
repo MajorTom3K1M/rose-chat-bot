@@ -10,8 +10,8 @@ module.exports = paymentHandler = async event => {
     },
     {
       type: 'text',
-      text: 'ชำระเงินเสร็จสิ้นแล้วค่ะ ข่วยบอกสถานที่จัดส่งผ่านการ share location ด้วยนะคะ'
-    },
+      text: 'ชำระเงินเสร็จสิ้นแล้วค่ะ ช่วยบอกสถานที่จัดส่งผ่านการ share location ด้วยนะคะ'
+    }/*,
     {
       type: 'flex',
       altText: 'xxxxx',
@@ -37,5 +37,6 @@ module.exports = paymentHandler = async event => {
         }
       }
     }
+    */
   ]
 }

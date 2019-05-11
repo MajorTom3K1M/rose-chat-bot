@@ -11,11 +11,12 @@ module.exports = checkoutOrder = async event => {
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
       let items = order.get('items')
       for(i = 0; i < items.length; i++) {
-        let oldQty = await DB.collection('Products').doc(items[0].itemId).get('quantity')
-        let newQty = parseInt(oldQty) - parseInt(items[0].qty)
+        let oldQty = await DB.collection('Products').doc(items[i].itemId).get('quantity')
+        let newQty = parseInt(oldQty) - parseInt(items[i].qty)
+        console.log(parseInt(oldQty) - parseInt(items[i].qty))
         await DB.collection('Products')
-                .doc(items[0].itemId)
-                .update({quantity: parseInt(newQty)})
+                .doc(items[i].itemId)
+                .update({quantity: newQty})
       }
       await DB.collection('Orders')
               .doc(order.id)
