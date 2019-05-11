@@ -3,7 +3,7 @@ var admin = require('firebase-admin');
 
 module.exports = updateOrder = async (clientId, itemId) => {
   let productCollection = await DB.collection('Products')
-                                  .doc(items)
+                                  .doc(itemId)
                                   .get()
   let productQuantity = productCollection.get('quantity')
 
@@ -14,7 +14,7 @@ module.exports = updateOrder = async (clientId, itemId) => {
   userOrderDocs.forEach(order => {
     let userStatus = order.get('status')
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
-      let itemList = order.data().items
+      let itemList = order.get('items')
       let isUpdated = false
       for(i = 0; i < itemList.length; i++) {
         if(itemList[i].itemId === itemId) {
