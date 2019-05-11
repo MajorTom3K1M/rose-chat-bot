@@ -8,10 +8,9 @@ module.exports = resolveOrderStatus = async clientId => {
   let userStatus = 'None'
   for(i = 0; i < userOrderDocs.length; i++) {
     userStatus = userOrderDocs[i].get('status')
-    if(userStatus === 'shopping' || userStatus === 'paying') {
+    if(userStatus === 'shopping' || userStatus === 'paying' || userStatus === 'shipping') {
       return userStatus
     }
   }
-  
-  return userStatus
+  return 'None'
 }
