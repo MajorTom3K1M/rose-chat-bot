@@ -15,7 +15,7 @@ module.exports = checkoutOrder = async event => {
         let newQty = parseInt(oldQty) - parseInt(items[0].qty)
         await DB.collection('Products')
                 .doc(items[0].itemId)
-                .update({quantity: newQty})
+                .update({quantity: parseInt(newQty)})
       }
       await DB.collection('Orders')
               .doc(order.id)
