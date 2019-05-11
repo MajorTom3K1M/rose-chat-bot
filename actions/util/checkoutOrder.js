@@ -11,7 +11,8 @@ module.exports = checkoutOrder = async event => {
     if(userStatus != 'cancelled' && userStatus != 'shipped') {
       let items = order.get('items')
       for(i = 0; i < items.length; i++) {
-        let oldQty = await DB.collection('Products').doc(items[i].itemId).get('quantity')
+        let prodCol = await DB.collection('Products').doc(items[i].itemId).get()
+        let oldQty = prodCol.get('quantity')
         let newQty = parseInt(oldQty) - parseInt(items[i].qty)
         console.log(parseInt(oldQty) - parseInt(items[i].qty))
         await DB.collection('Products')
