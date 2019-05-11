@@ -19,7 +19,7 @@ module.exports = showHistoryHandler = async event => {
     })
     msg.push({
       type: 'text',
-      text: "#" + (i+1) + " ORDER NO." + histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime'),
+      text: "#" + (i+1) + " ORDER NO." + histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime').getMonth + "/" + histories[i].get('shippedTime').getYear,
       wrap: true
     })
   }
