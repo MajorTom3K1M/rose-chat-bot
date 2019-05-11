@@ -11,31 +11,6 @@ module.exports = paymentHandler = async event => {
     {
       type: 'text',
       text: 'ชำระเงินเสร็จสิ้นแล้วค่ะ ข่วยบอกสถานที่จัดส่งผ่านการ share location ด้วยนะคะ'
-    },
-    {
-      type: 'flex',
-      altText: 'Button',
-      contents: {
-        type: 'bubble',
-        body: {
-          type: 'box',
-          layout: 'vertical',
-          contents: [
-            {
-              type: 'text',
-              text: "Destination Address"
-            },
-            {
-              type: 'button',
-              style: "link",
-              action: {
-                type: 'location',
-                label: 'Location'
-              }
-            }
-          ]
-        }
-      }
     }
   ]
 }
