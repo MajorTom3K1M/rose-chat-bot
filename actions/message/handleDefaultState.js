@@ -14,7 +14,7 @@ module.exports = handleDefaultState = async event => {
     msg = await manageOrderHandler(event)
   }
   else if (includesSome(eventText, ['examine', 'check', 'เช็ค', 'ประวัติการสั่งซื้อ', 'history'])) {
-    msg = showHistoryHandler(event)
+    msg = await showHistoryHandler(event)
   }
 
   return msg
