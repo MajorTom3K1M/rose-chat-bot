@@ -46,7 +46,7 @@ module.exports = checkOrderHandler = async event => {
         },
         {
           type: 'text',
-          text: '$' + (parseFloat(productMap.get(orderItems[i].itemId)) * parseInt(orderItems[i].qty)),
+          text: '$' + (parseFloat(productMap.get(orderItems[i].itemId)) * parseInt(orderItems[i].qty)).toFixed(2),
           size: 'sm',
           color: '#111111',
           align: 'end'
@@ -91,7 +91,7 @@ module.exports = checkOrderHandler = async event => {
       },
       {
         type: 'text',
-        text: '$' + totalPrice,
+        text: '$' + totalPrice.toFixed(2),
         size: 'sm',
         color: '#111111',
         align: 'end'
