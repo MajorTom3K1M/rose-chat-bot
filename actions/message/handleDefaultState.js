@@ -13,7 +13,7 @@ module.exports = handleDefaultState = async event => {
   if(event.message.type === 'text') {
       eventText = event.message.text.toLowerCase()
   }
-  
+
   if (includesSome(eventText, ['รายการสินค้า', 'ลิสต์', 'ลิส', 'สินค้า', 'product', 'buy', 'ซื้อ'])) {
     msg = await manageOrderHandler(event)
   }
