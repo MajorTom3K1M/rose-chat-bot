@@ -16,21 +16,25 @@ module.exports = paymentHandler = async event => {
       type: 'flex',
       altText: 'Button',
       contents: {
-        type: 'carousel',
-        contents: [
-          {
-            type: 'text',
-            text: "Destination Address"
-          },
-          {
-            type: 'button',
-            style: "link",
-            action: {
-              type: 'location',
-              label: 'Location'
+        type: 'bubble',
+        body: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: "Destination Address"
+            },
+            {
+              type: 'button',
+              style: "link",
+              action: {
+                type: 'location',
+                label: 'Location'
+              }
             }
-          }
-        ]
+          ]
+        }
       }
     }
   ]

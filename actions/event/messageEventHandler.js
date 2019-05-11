@@ -34,12 +34,12 @@ module.exports = handleMessageEvent = async event => {
         console.log(orderStatus)
         switch(orderStatus) {
             case 'paying':
-                if (event.message.type === "image")
-                    msg = paymentHandler(event)
+                if (event.message.type === 'image')
+                    msg = await paymentHandler(event)
                 break
             case 'shipping':
                 if (event.message.type === 'location')
-                    msg = shippingHandler(event)
+                    msg = await shippingHandler(event)
                 break
             case 'shopping':
                 msg = await handleShoppingState(event)
