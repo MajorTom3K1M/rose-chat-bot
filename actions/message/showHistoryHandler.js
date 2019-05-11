@@ -32,6 +32,7 @@ module.exports = showHistoryHandler = async event => {
       body: {
         type: 'box',
         layout: 'vertical',
+        spacing: 'sm',
         contents: msg
       }
     }
