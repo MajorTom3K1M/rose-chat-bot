@@ -4,14 +4,17 @@ module.exports = resolveOrderStatus = async clientId => {
   let userOrderCollection = await DB.collection('Orders')
                                 .where('clientId', '==', clientId)
                                 .get()
+
   let userOrderDocs = userOrderCollection.docs
   let userStatus = 'None'
   for(i = 0; i < userOrderDocs.length; i++) {
     userStatus = userOrderDocs[i].get('status')
-    if(userStatus === 'shopping' || userStatus === 'paying') {
-      return userStatus
+    if(userStatus === 'shopping') {
+      return 'shopping'
+    }
+    else if(userStatus === 'paying') {
+      return 'paying'
     }
   }
-  
-  return userStatus
+  return 'None'
 }
