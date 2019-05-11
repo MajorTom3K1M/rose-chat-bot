@@ -13,7 +13,10 @@ const paymentHandler = require('../image/paymentHandler')
 const shippingHandler = require('../location/shippingHandler')
 
 module.exports = handleMessageEvent = async event => {
-    let eventText = event.message.text.toLowerCase()
+    let eventText = ''
+    if(event.message.type === 'text') {
+        eventText = event.message.text.toLowerCase()
+    }
 
     let msg = [{
         type: 'text',
