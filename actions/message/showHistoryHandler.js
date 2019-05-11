@@ -12,7 +12,11 @@ module.exports = showHistoryHandler = async event => {
   for(i = 0; i < histories.length; i++) {
     msg.push({
       type: 'text',
-      text: "#" + (i+1) + " ORDER NO." + histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime')
+      text: "#" + (i+1) + " ORDER NO." + histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime'),
+      wrap: true
+    })
+    msg.push({
+      type: 'separator'
     })
   }
   
