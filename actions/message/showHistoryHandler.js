@@ -7,16 +7,20 @@ module.exports = showHistoryHandler = async event => {
                                     .limit(5)
                                     .get()
   
-  msg = []
+  msg = [{
+    type: 'text',
+    size: 'xl',
+    text: 'Shipped Logs'
+  }]
   let histories = historyCollection.docs
   for(i = 0; i < histories.length; i++) {
+    msg.push({
+      type: 'separator'
+    })
     msg.push({
       type: 'text',
       text: "#" + (i+1) + " ORDER NO." + histories[i].id + ' was completely shipped at ' + histories[i].get('shippedTime'),
       wrap: true
-    })
-    msg.push({
-      type: 'separator'
     })
   }
   
