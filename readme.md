@@ -9,7 +9,7 @@ Rosé Chatbot is a LINE chatbot acted as an interface between a merchant and the
 Unfortunately, this version of chatbot is only supported Thai language.
 
 ## Installation
-    git clone https://gitlab.com/userkmitl/rose-chat-bot.git
+    git clone https://github.com/MajorTom3K1M/rose-chat-bot.git
     npm install
 
 ## Get your LINE channel ready (If you've already had, skip this one)
