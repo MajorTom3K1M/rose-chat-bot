@@ -22,10 +22,10 @@ module.exports = handleShoppingState = async event => {
     msg = await checkOrderHandler(event)
   }
   else if (includesSome(eventText, ['ชำระ', 'ยืนยัน', 'pay', 'payment', 'checkout', 'check out', 'เสร็จ', 'เรียบร้อย'])) {
-    msg = resolveOrderHandler(event)
+    msg = await resolveOrderHandler(event)
   }
   else if (includesSome(eventText, ['ไม่', 'cancel', 'เลิก', 'delete', 'ลบ', 'remove'])) {
-    msg = cancelOrderHandler(event)
+    msg = await cancelOrderHandler(event)
   }
 
   return msg
